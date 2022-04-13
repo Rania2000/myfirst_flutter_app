@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
@@ -11,6 +12,7 @@ import 'package:signup/screens/Signup/components/or_divider.dart';
 import 'package:signup/screens/Signup/components/social_icon.dart';
 import 'package:signup/screens/login_success/login_sucess_screen.dart';
 import 'package:signup/screens/login_successF/login_sucess_screen.dart';
+import 'package:signup/services/authservice.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -22,7 +24,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     String dropdownValue = 'Personne Physique';
-
+    var firstname, lastname, adress, email, password, status, phone, cin;
     return Background(
       child: SingleChildScrollView(
         child: Column(
@@ -52,75 +54,83 @@ class _BodyState extends State<Body> {
               child: Column(
                 children: [
                   TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Nom',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        // hintText: 'EMAIL',
-                        // hintStyle: ,
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'Nom',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          // hintText: 'EMAIL',
+                          // hintStyle: ,
 
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: kPrimaryColor))),
-                  ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kPrimaryColor))),
+                      onChanged: (val) {
+                        firstname = val;
+                      }),
 
                   TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Prénom',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: kPrimaryColor))),
-                  ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'Prénom',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kPrimaryColor))),
+                      onChanged: (val) {
+                        lastname = val;
+                      }),
                   TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        // hintText: 'EMAIL',
-                        // hintStyle: ,
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: kPrimaryColor))),
-                  ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          // hintText: 'EMAIL',
+                          // hintStyle: ,
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kPrimaryColor))),
+                      onChanged: (val) {
+                        email = val;
+                      }),
                   TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Adresse',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: kPrimaryColor))),
-                  ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'Adresse',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kPrimaryColor))),
+                      onChanged: (val) {
+                        adress = val;
+                      }),
                   Center(
                       child: DropdownButtonFormField(
                     value: dropdownValue,
@@ -143,52 +153,58 @@ class _BodyState extends State<Body> {
                   )),
 
                   TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'CIN / Immatricule ',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: kPrimaryColor))),
-                  ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'CIN / Immatricule ',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kPrimaryColor))),
+                      onChanged: (val) {
+                        cin = val;
+                      }),
                   TextFormField(
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Numéro tlf',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: kPrimaryColor))),
-                  ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'Numéro tlf',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kPrimaryColor))),
+                      onChanged: (val) {
+                        phone = val;
+                      }),
                   TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Mot De Passe  ',
-                        labelStyle: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                        suffixIcon: Icon(
-                          Icons.visibility,
-                          color: kPrimaryLightColor,
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: kPrimaryColor))),
-                    obscureText: true,
-                  ),
+                      decoration: InputDecoration(
+                          labelText: 'Mot De Passe  ',
+                          labelStyle: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                          suffixIcon: Icon(
+                            Icons.visibility,
+                            color: kPrimaryLightColor,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kPrimaryColor))),
+                      obscureText: true,
+                      onChanged: (val) {
+                        password = val;
+                      }),
                   // ignore: prefer_const_literals_to_create_immutables
                 ],
               ),
@@ -196,6 +212,18 @@ class _BodyState extends State<Body> {
             RoundedButton(
               text: "SignUp",
               press: () {
+                AuthService()
+                    .AddClient(firstname, lastname, email, password, status,
+                        adress, phone, cin)
+                    .then((val) {
+                  Fluttertoast.showToast(
+                      msg: val.data['msg'],
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                });
                 Navigator.push(
                   context,
                   MaterialPageRoute(

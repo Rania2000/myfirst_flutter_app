@@ -13,6 +13,7 @@ import 'package:signup/constants.dart';
 import 'package:signup/model/login_model.dart';
 import 'package:signup/screens/Login/components/background.dart';
 import 'package:signup/screens/login_success/login_sucess_screen.dart';
+import 'package:signup/screens/login_successF/login_sucess_screen.dart';
 import 'package:signup/screens/users/sign1.dart';
 import 'package:signup/services/authservice.dart';
 //import 'package:signup/screens/Signup/signup_screen.dart';
@@ -110,9 +111,18 @@ class _BodyState extends State<Body> {
                         msg: 'Authentificated',
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM,
-                        backgroundColor: Colors.red,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.green,
                         textColor: Colors.white,
                         fontSize: 16.0);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LoginSuccessScreenF();
+                        },
+                      ),
+                    );
                   }
                 });
                 /* Navigator.push(
