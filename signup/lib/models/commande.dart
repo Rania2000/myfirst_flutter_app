@@ -8,7 +8,7 @@ class Commande {
   final String adrDepart;
   final String adrArrive;
   final String status;
-  final customerId;
+  final  customerId; 
   final String date;
 
   Commande(

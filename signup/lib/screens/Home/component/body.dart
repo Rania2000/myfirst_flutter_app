@@ -18,12 +18,13 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> with TickerProviderStateMixin {
   bool isInCall = false;
+  var token;
   List<Commande> listCommandes = [];
   commadeCalls() {
     setState(() {
       isInCall = true;
     });
-    CommandeServices.getListAllOrders().then((res) {
+    CommandeServices.getListAllOrders(token).then((res) {    // i added "token" as variable 
       setState(() {
         listCommandes = res;
       });

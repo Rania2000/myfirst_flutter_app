@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:signup/constants.dart';
+import 'package:signup/models/commande.dart';
+import 'package:signup/services/commande_service.dart';
 
 //import 'package:signup/screens/Login/components/background.dart';
 
@@ -11,7 +13,25 @@ class Body extends StatefulWidget {
   State<Body> createState() => _BodyState();
 }
 
+
 class _BodyState extends State<Body> with TickerProviderStateMixin {
+  bool isInCall = false;
+  var token;
+  List<Commande> listCommandes = [];
+  commadeCalls() {
+    setState(() {
+      isInCall = true;
+    });
+    CommandeServices.getListAllOrders(token).then((res) {    // i added "token" as variable 
+      setState(() {
+        listCommandes = res;
+      });
+    });
+    setState(() {
+      isInCall = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
