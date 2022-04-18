@@ -16,6 +16,7 @@ import 'package:signup/screens/login_success/login_sucess_screen.dart';
 import 'package:signup/screens/login_successF/login_sucess_screen.dart';
 import 'package:signup/screens/users/sign1.dart';
 import 'package:signup/services/authservice.dart';
+import 'package:signup/shared/sharedPrefValues.dart';
 //import 'package:signup/screens/Signup/signup_screen.dart';
 
 class Body extends StatefulWidget {
@@ -30,6 +31,13 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   //erreur
   var email, password, token;
+  final _ConName = TextEditingController();
+  final _ConPren = TextEditingController();
+  final _ConEmail = TextEditingController();
+  final _ConAdress = TextEditingController();
+  final _ConCIN = TextEditingController();
+  final _Contlf = TextEditingController();
+  final _ConPass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -105,8 +113,11 @@ class _BodyState extends State<Body> {
               text: "Login",
               press: () {
                 AuthService().loginFr(email, password).then((val) {
+                  print(val.data);
                   if (val.data['success']) {
-                    token = val.data['token'];
+                    //get token from api response
+                    //save token to sharedPref
+                    //saveAccessTokenSharedPref(token, refreshToken)
                     Fluttertoast.showToast(
                         msg: 'Authentificated',
                         toastLength: Toast.LENGTH_SHORT,

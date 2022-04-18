@@ -71,7 +71,7 @@ class _CommandeComponentState extends State<CommandeComponent> {
                               color: kPrimaryColor,
                               size: 16,
                             ),
-                            Text("Aouina",
+                            Text(widget.commande.adrDepart,
                                 style: TextStyle(
                                     //height: 1.171875,
                                     fontSize: 12)),
@@ -87,7 +87,8 @@ class _CommandeComponentState extends State<CommandeComponent> {
                               color: kPrimaryColor,
                               size: 16,
                             ),
-                            Text(" 1pm",
+                            //date format
+                            Text('1am',
                                 style: TextStyle(
                                     //height: 1.171875,
                                     fontSize: 12)),

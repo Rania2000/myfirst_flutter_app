@@ -20,11 +20,18 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  String dropdownValue = 'Personne Physique';
+  var firstname, lastname, adress, email, password, status, phone, cin;
+  final _ConName = TextEditingController();
+  final _ConPren = TextEditingController();
+  final _ConEmail = TextEditingController();
+  final _ConAdress = TextEditingController();
+  final _ConCIN = TextEditingController();
+  final _Contlf = TextEditingController();
+  final _ConPass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    String dropdownValue = 'Personne Physique';
-    var firstname, lastname, adress, email, password, status, phone, cin;
     return Background(
       child: SingleChildScrollView(
         child: Column(
@@ -60,6 +67,7 @@ class _BodyState extends State<Body> {
                         }
                         return null;
                       },
+                      controller: _ConName,
                       decoration: InputDecoration(
                           labelText: 'Nom',
                           labelStyle: TextStyle(
@@ -76,6 +84,7 @@ class _BodyState extends State<Body> {
                       }),
 
                   TextFormField(
+                      controller: _ConPren,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -94,6 +103,7 @@ class _BodyState extends State<Body> {
                         lastname = val;
                       }),
                   TextFormField(
+                      controller: _ConEmail,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -114,6 +124,7 @@ class _BodyState extends State<Body> {
                         email = val;
                       }),
                   TextFormField(
+                      controller: _ConAdress,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -153,6 +164,7 @@ class _BodyState extends State<Body> {
                   )),
 
                   TextFormField(
+                      controller: _ConCIN,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -171,6 +183,7 @@ class _BodyState extends State<Body> {
                         cin = val;
                       }),
                   TextFormField(
+                      controller: _Contlf,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -189,6 +202,7 @@ class _BodyState extends State<Body> {
                         phone = val;
                       }),
                   TextField(
+                      controller: _ConPass,
                       decoration: InputDecoration(
                           labelText: 'Mot De Passe  ',
                           labelStyle: TextStyle(
@@ -213,11 +227,18 @@ class _BodyState extends State<Body> {
               text: "SignUp",
               press: () {
                 AuthService()
-                    .AddClient(firstname, lastname, email, password, status,
-                        adress, phone, cin)
+                    .AddClient(
+                        _ConName.text,
+                        _ConPren.text,
+                        _ConAdress.text,
+                        _ConEmail.text,
+                        _ConPass.text,
+                        dropdownValue,
+                        _Contlf.text,
+                        _ConCIN.text)
                     .then((val) {
                   Fluttertoast.showToast(
-                      msg: val.data['msg'],
+                      msg: 'user created successfully',
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
                       backgroundColor: Colors.red,

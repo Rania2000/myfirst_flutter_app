@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/models/commande.dart';
+import 'package:signup/screens/Home/component/commande-item.dart';
 import 'package:signup/services/commande_service.dart';
 
 //import 'package:signup/screens/Login/components/background.dart';
@@ -22,7 +23,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
     setState(() {
       isInCall = true;
     });
-    CommandeServices.getListAllOrders(token).then((res) {    // i added "token" as variable 
+    CommandeServices.getListAllOrders().then((res) {    // i added "token" as variable
       setState(() {
         listCommandes = res;
       });
@@ -48,14 +49,19 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               //SizedBox(height: 20),
-              Text(
-                "Mes Livraison",
-                style: TextStyle(
-                  //height: 1.171875,
-                  fontSize: 34.0,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w700,
-                  color: Color.fromARGB(255, 41, 35, 92),
+              TextButton(
+                onPressed: (){
+                  commadeCalls();
+                },
+                child: Text(
+                  "Mes Livraison",
+                  style: TextStyle(
+                    //height: 1.171875,
+                    fontSize: 34.0,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromARGB(255, 41, 35, 92),
+                  ),
                 ),
               ),
               SizedBox(height: 10),
@@ -99,115 +105,9 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                         child: ListView.builder(
                           shrinkWrap: true,
                           physics: AlwaysScrollableScrollPhysics(),
-                          itemCount: 10,
+                          itemCount: listCommandes.length,
                           itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.only(right: 0, top: 5),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 130,
-                                    height: 130,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadiusDirectional.circular(
-                                                20),
-                                        color: Colors.white,
-                                        image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                "assets/images/fleur.jpg"))),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(20),
-                                              bottomRight: Radius.circular(20)),
-                                          color: Colors.white),
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Bouquet de fleur, Fleuriste Manzah5",
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                //height: 1.171875,
-                                                fontSize: 14.0,
-                                                fontFamily: 'Poppins',
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
-                                            Text(
-                                              'de Manzah5 à Tunis ',
-                                              style: TextStyle(
-                                                  //height: 1.171875,
-                                                  fontSize: 12,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w700,
-                                                  color: myGrey),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.place_rounded,
-                                                      color: kPrimaryColor,
-                                                      size: 16,
-                                                    ),
-                                                    Text(" Manzah5",
-                                                        style: TextStyle(
-                                                            //height: 1.171875,
-                                                            fontSize: 12))
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.timer,
-                                                      color: kPrimaryColor,
-                                                      size: 16,
-                                                    ),
-                                                    Text(" 17pm",
-                                                        style: TextStyle(
-                                                            //height: 1.171875,
-                                                            fontSize: 12)),
-                                                  ],
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  " 4dt",
-                                                  style: TextStyle(
-                                                      //height: 1.171875,
-                                                      fontSize: 24,
-                                                      fontFamily: 'Poppins',
-                                                      fontWeight:
-                                                          FontWeight.w900,
-                                                      color: kPrimaryColor),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            );
+                            return CommandeComponent(commande: listCommandes[index]);
                           },
                         ),
                       ),

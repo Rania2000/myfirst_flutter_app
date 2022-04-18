@@ -50,7 +50,7 @@ class Commande {
       json['adresse_depart'].toString(),
       json['adresse_arrive'].toString(),
       json['caracteristique'].toString(),
-      json['customer_id']['_id'].toString(),
+      json['customer_id'].toString(),
       json['date'].toString(),
       json['status'].toString(),
       json['typevehicule'].toString(),
