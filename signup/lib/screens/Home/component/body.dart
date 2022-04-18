@@ -24,7 +24,8 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
     setState(() {
       isInCall = true;
     });
-    CommandeServices.getListAllOrders(token).then((res) {    // i added "token" as variable 
+    CommandeServices.getListAllOrders(token).then((res) {
+      // i added "token" as variable
       setState(() {
         listCommandes = res;
       });
