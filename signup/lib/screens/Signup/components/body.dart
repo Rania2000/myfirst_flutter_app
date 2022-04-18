@@ -26,7 +26,6 @@ class _BodyState extends State<Body> {
   final _ConName = TextEditingController();
   final _ConPren = TextEditingController();
   final _ConEmail = TextEditingController();
-
   final _ConAdress = TextEditingController();
   final _ConCIN = TextEditingController();
   final _Contlf = TextEditingController();
@@ -176,7 +175,7 @@ class _BodyState extends State<Body> {
                   )),
 
                   TextFormField(
-                      // controller: _ConCIN,
+                       controller: _ConCIN,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';

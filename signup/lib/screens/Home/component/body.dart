@@ -24,8 +24,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
     setState(() {
       isInCall = true;
     });
-    CommandeServices.getListAllOrders(token).then((res) {
-      // i added "token" as variable
+    CommandeServices.getListAllOrders().then((res) {    // i added "token" as variable
       setState(() {
         listCommandes = res;
       });
@@ -51,14 +50,19 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               //SizedBox(height: 20),
-              Text(
-                "Mes Livraison",
-                style: TextStyle(
-                  //height: 1.171875,
-                  fontSize: 34.0,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w700,
-                  color: Color.fromARGB(255, 41, 35, 92),
+              TextButton(
+                onPressed: (){
+                  commadeCalls();
+                },
+                child: Text(
+                  "Mes Livraison",
+                  style: TextStyle(
+                    //height: 1.171875,
+                    fontSize: 34.0,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromARGB(255, 41, 35, 92),
+                  ),
                 ),
               ),
               SizedBox(height: 10),
