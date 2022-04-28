@@ -29,6 +29,12 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   //erreur
   var email, password, token;
+  var _passwordVisible = false;
+  final _ConEmail = TextEditingController();
+  final _ConAdress = TextEditingController();
+  final _ConCIN = TextEditingController();
+  final _Contlf = TextEditingController();
+  final _ConPass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -59,6 +65,7 @@ class _BodyState extends State<Body> {
                 children: [
                   // SizedBox(height: size.height * 0.01),
                   TextFormField(
+
                       //  onSaved: (input) => requestModel.email ,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
@@ -66,6 +73,7 @@ class _BodyState extends State<Body> {
                         }
                         return null;
                       },
+                      controller: _ConEmail,
                       decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(
@@ -80,6 +88,8 @@ class _BodyState extends State<Body> {
                         email = val;
                       }),
                   TextField(
+                      controller: _ConPass,
+                      obscureText: !_passwordVisible,
                       //   onSaved:(input) => requestModel.password ,
                       decoration: InputDecoration(
                           labelText: 'Mot De Passe  ',
@@ -87,13 +97,23 @@ class _BodyState extends State<Body> {
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: kPrimaryLightColor,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: kPrimaryLightColor,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                _passwordVisible = !_passwordVisible;
+                              });
+                            },
                           ),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: kPrimaryColor))),
-                      obscureText: true,
                       onChanged: (val) {
                         password = val;
                       }),
@@ -120,7 +140,7 @@ class _BodyState extends State<Body> {
                           return LoginSuccessScreen();
                         },
                       ),
-                    ); 
+                    );
                   }
                 });
                 /* Navigator.push(

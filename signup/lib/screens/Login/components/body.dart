@@ -38,6 +38,7 @@ class _BodyState extends State<Body> {
   final _ConCIN = TextEditingController();
   final _Contlf = TextEditingController();
   final _ConPass = TextEditingController();
+  var _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -89,6 +90,7 @@ class _BodyState extends State<Body> {
                         email = val;
                       }),
                   TextField(
+                      obscureText: !_passwordVisible,
                       //   onSaved:(input) => requestModel.password ,
                       decoration: InputDecoration(
                           labelText: 'Mot De Passe  ',
@@ -96,13 +98,26 @@ class _BodyState extends State<Body> {
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: kPrimaryLightColor,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: kPrimaryLightColor,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                _passwordVisible = !_passwordVisible;
+                              });
+                            },
                           ),
+
+                         
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: kPrimaryColor))),
-                      obscureText: true,
+                     
                       onChanged: (val) {
                         password = val;
                       }),

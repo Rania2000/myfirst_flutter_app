@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:signup/constants.dart';
 import 'package:signup/shared/sharedPrefValues.dart';
 
 //import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +11,7 @@ class AuthService {
 /////////////// Login fournisseur  ///////////////////////////////
   loginFr(email, password) async {
     try {
-      var response = await dio.post('http://10.0.2.2:5000/clients/login',
+      var response = await dio.post(baseUrl + 'clients/login',
           data: {"email": email, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       print(response.headers['Authorization'].toString());
@@ -32,9 +33,14 @@ class AuthService {
 /////////////// Login Livreurr  ///////////////////////////////////////////////
   loginLiv(email, password) async {
     try {
-      return await dio.post('http://10.0.2.2:5000/livreur/login',
+      var response = await dio.post(baseUrl + 'livreur/login',
           data: {"email": email, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(response.headers['Authorization'].toString());
+      var token = response.data['token'];
+      var refreshToken = response.headers['Authorization'];
+      saveAccessTokenSharedPref(token, refreshToken.toString());
+      return response;
     } on DioError catch (e) {
       Fluttertoast.showToast(
           msg: e.response?.data['msg'],
@@ -51,7 +57,7 @@ class AuthService {
   AddClient(
       firstname, lastname, adress, email, password, status, phone, cin) async {
     try {
-      var response = await dio.post('http://10.0.2.2:5000/clients/',
+      var response = await dio.post(baseUrl + 'clients/',
           data: {
             "email": email,
             "adress": adress,
@@ -80,7 +86,7 @@ class AuthService {
   AddLivreur(firstname, lastname, email, password, status, adress, phone,
       permis, voiture, cin) async {
     try {
-      return await dio.post('http://localhost:5000/livreur/',
+      var response = await dio.post(baseUrl + 'livreur/',
           data: {
             "firstname": firstname,
             "lastname": lastname,
@@ -88,12 +94,14 @@ class AuthService {
             "password": password,
             "status": status,
             "adress": adress,
-            "permis": permis,
             "phone": phone,
-            "cin": cin,
-            "voiture": voiture
+            "permis": permis,
+            "voiture": voiture,
+            "cin": cin
           },
           options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(response.data);
+      return response;
     } on DioError catch (e) {
       Fluttertoast.showToast(
           msg: e.response?.data['msg'],

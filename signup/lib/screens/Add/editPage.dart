@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:signup/components/InputWrapper.dart';
@@ -7,7 +7,12 @@ import '../../constants.dart';
 import 'Header.dart';
 
 // ignore: use_key_in_widget_constructors
-class EditScreen extends StatelessWidget {
+class EditScreen extends StatefulWidget {
+  @override
+  State<EditScreen> createState() => _EditScreenState();
+}
+
+class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +42,7 @@ class EditScreen extends StatelessWidget {
                     topRight: Radius.circular(40),
                   )),
               child: InputWrapper(),
-            ))
+            )),
           ],
         ),
       ),

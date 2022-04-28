@@ -1,15 +1,14 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 //import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:signup/components/rounded_button.dart';
-
 //import 'package:signup/components/already_have_an_account_acheck.dart';
-
 import 'package:signup/constants.dart';
 import 'package:signup/screens/Login/login_screen.dart';
+import 'package:signup/screens/LoginLiv/login_screen.dart';
 //import 'package:signup/screens/Login/login_screen.dart';
 import 'package:signup/screens/Signup/components/background.dart';
 import 'package:signup/screens/Signup/components/or_divider.dart';
@@ -30,11 +29,26 @@ class _BodyState extends State<Body> {
   final _ConCIN = TextEditingController();
   final _Contlf = TextEditingController();
   final _ConPass = TextEditingController();
+  var _passwordVisible = false;
+  Object? arguments;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     String dropdownValue = 'Livreur Autonome';
+    String dropdownValue2 = 'voiture';
+    String dropdownValue3 = 'type A';
+
+    final List<String> typeLiv = ['Livreur Autonome', 'Société Livraison '];
+    final List<String> typepermis = ['type A', 'type B', 'type C'];
+    final List<String> typeVehicule = [
+      'voiture',
+      'camion',
+      'moto',
+      'byciclette',
+      'pas vehicule'
+    ];
+
     var firstname,
         lastname,
         email,
@@ -115,6 +129,7 @@ class _BodyState extends State<Body> {
                       }),
                   TextFormField(
                       controller: _ConEmail,
+                      keyboardType: TextInputType.emailAddress,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -134,6 +149,7 @@ class _BodyState extends State<Body> {
                       onChanged: (val) {
                         email = val;
                       }),
+
                   TextFormField(
                       controller: _ConAdress,
                       validator: (String? value) {
@@ -160,22 +176,22 @@ class _BodyState extends State<Body> {
                     elevation: 2,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.grey),
-                    items: [dropdownValue, 'Société Livraison ']
-                        .map<DropdownMenuItem<String>>((valueItem) {
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                    },
+                    items: typeLiv.map((valueItem) {
                       return DropdownMenuItem<String>(
                         value: valueItem,
                         child: Text(valueItem),
                       );
                     }).toList(),
-                    onChanged: (String? val) {
-                      setState(() {
-                        dropdownValue = val!;
-                      });
-                    },
                   )),
 
                   TextFormField(
-                       controller: _ConCIN,
+                      controller: _ConCIN,
+                      keyboardType: TextInputType.number,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -195,6 +211,7 @@ class _BodyState extends State<Body> {
                       }),
                   TextFormField(
                       controller: _Contlf,
+                      keyboardType: TextInputType.number,
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter some text';
@@ -212,58 +229,71 @@ class _BodyState extends State<Body> {
                       onChanged: (val) {
                         phone = val;
                       }),
-                  TextFormField(
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'voiture',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: kPrimaryColor))),
-                      onChanged: (val) {
-                        voiture = val;
-                      }),
-                  TextFormField(
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'type permis',
-                          hintText: 'A, B ou C',
-                          labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: kPrimaryColor))),
-                      onChanged: (val) {
-                        permis = val;
-                      }),
+                  Center(
+                      child: DropdownButtonFormField(
+                    value: dropdownValue2,
+                    icon: const Icon(Icons.arrow_drop_down_rounded),
+                    elevation: 2,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.grey),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue2 = newValue!;
+                      });
+                    },
+                    items: typeVehicule.map((valueItem) {
+                      return DropdownMenuItem<String>(
+                        value: valueItem,
+                        child: Text(valueItem),
+                      );
+                    }).toList(),
+                  )),
+                  Center(
+                      child: DropdownButtonFormField(
+                    value: dropdownValue3,
+                    icon: const Icon(Icons.arrow_drop_down_rounded),
+                    elevation: 2,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.grey),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue3 = newValue!;
+                      });
+                    },
+                    items: typepermis.map((valueItem) {
+                      return DropdownMenuItem<String>(
+                        value: valueItem,
+                        child: Text(valueItem),
+                      );
+                    }).toList(),
+                  )),
+
                   TextField(
                       controller: _ConPass,
+                      obscureText: !_passwordVisible,
                       decoration: InputDecoration(
                           labelText: 'Mot De Passe  ',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: kPrimaryLightColor,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: kPrimaryLightColor,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                _passwordVisible = !_passwordVisible;
+                              });
+                            },
                           ),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: kPrimaryColor))),
-                      obscureText: true,
                       onChanged: (val) {
                         password = val;
                       }),
@@ -275,11 +305,20 @@ class _BodyState extends State<Body> {
               text: "Sign Up",
               press: () {
                 AuthService()
-                    .AddLivreur(firstname, lastname, email, password, status,
-                        adress, phone, voiture, permis, cin)
+                    .AddLivreur(
+                        _ConName.text,
+                        _ConPren.text,
+                        _ConEmail.text,
+                        _ConPass.text,
+                        dropdownValue,
+                        _ConAdress.text,
+                        _Contlf.text,
+                        dropdownValue3,
+                        dropdownValue2,
+                        _ConCIN.text)
                     .then((val) {
                   Fluttertoast.showToast(
-                      msg: val.data['msg'],
+                      msg: 'user created successfully',
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
                       backgroundColor: Colors.green,
@@ -289,7 +328,7 @@ class _BodyState extends State<Body> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return LoginSuccessScreen();
+                        return LoginLivScreen();
                       },
                     ),
                   );
@@ -330,7 +369,7 @@ class _BodyState extends State<Body> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return LoginScreen();
+                          return LoginLivScreen();
                         },
                       ),
                     );

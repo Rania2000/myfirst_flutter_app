@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:signup/constants.dart';
 import 'package:signup/models/commande.dart';
 import 'package:signup/shared/sharedPrefValues.dart';
 
@@ -13,7 +14,7 @@ class CommandeServices {
     token = getUserInfoSharedPref('token');
     print(token);
     dio.options.headers['Authorization'] = 'Bearer $token';
-    response = await dio.get('http://10.0.2.2:5000/commande/');
+    response = await dio.get(baseUrl+'commande/');
 
     if (response.statusCode == 200) {
       print(response);
@@ -35,7 +36,7 @@ class CommandeServices {
     var token = await getUserInfoSharedPref("token");
     dio.options.headers["Authorization"] = "Bearer " + token;
 
-    await dio.post('http://10.0.2.2:5000/commande/add',data:commande.toJson()).then((value){
+    await dio.post(baseUrl+'commande/add',data:commande.toJson()).then((value){
       print(value.data);
       response= value.statusCode;
     });

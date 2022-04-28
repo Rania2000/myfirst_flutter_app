@@ -12,6 +12,7 @@ class Livreur {
   final String cin;
   final panier; // to ask about the type if i add commande as a type
   final String permis;
+  final String voiture;
 
   Livreur(
       this.id,
@@ -22,6 +23,7 @@ class Livreur {
       this.email,
       this.password,
       this.permis,
+      this.voiture,
       this.phone,
       this.cin,
       this.panier);
@@ -37,6 +39,7 @@ class Livreur {
       'phone': phone,
       'status': status,
       'permis': permis,
+      'voiture': permis,
       'cin': cin,
       'panier': {},
     };
@@ -54,6 +57,7 @@ class Livreur {
       json['phone'].toString(),
       json['cin'].toString(),
       json['permis'].toString(),
+      json['voiture'].toString(),
       json['panier']['_id'].toString(),
     );
   }

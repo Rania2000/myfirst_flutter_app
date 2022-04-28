@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -17,12 +19,22 @@ class InputWrapper extends StatefulWidget {
 class _InputWrapperState extends State<InputWrapper> {
   bool isInCall = false;
   String dropdownValue = 'Alimentaire';
+  final List<String> typeC = [
+    'Alimentaire',
+    'Médicament',
+    'Fourniture',
+    'Cosmétique',
+    'Equipements Informatiques',
+    'Déménagement',
+    'Autres'
+  ];
   TextEditingController commandeController = TextEditingController();
   TextEditingController departController = TextEditingController();
   TextEditingController arriveController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
   TextEditingController commentController = TextEditingController();
+  DateTime _dateTime = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -81,6 +93,33 @@ class _InputWrapperState extends State<InputWrapper> {
                           border: InputBorder.none),
                     ),
                   ),
+                  Column(
+                    children: [
+                      Text(_dateTime == null
+                          ? 'Nothing has been picked yet'
+                          : _dateTime.toString()),
+                      //Text('choisir une date de livraison'),
+                      SizedBox(height: 5),
+                      RaisedButton(
+                        child: Text('Pick a date'),
+                        onPressed: () {
+                          showDatePicker(
+                                  context: context,
+                                  // ignore: prefer_if_null_operators, unnecessary_null_comparison
+                                  initialDate: _dateTime == null
+                                      ? DateTime.now()
+                                      : _dateTime,
+                                  firstDate: DateTime(2022),
+                                  lastDate: DateTime(2023))
+                              .then((date) {
+                            setState(() {
+                              _dateTime = date!;
+                            });
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(
@@ -95,27 +134,25 @@ class _InputWrapperState extends State<InputWrapper> {
                           border: InputBorder.none),
                     ),
                   ),
-        Center(
-            child: DropdownButtonFormField(
-              value: dropdownValue,
-              icon: const Icon(Icons.arrow_drop_down_rounded),
-              elevation: 2,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.grey),
-              items: [dropdownValue, 'furniture']
-                  .map<DropdownMenuItem<String>>((valueItem) {
-                return DropdownMenuItem<String>(
-                  value: valueItem,
-                  child: Text(valueItem),
-                );
-              }).toList(),
-              onChanged: (String? val) {
-                setState(() {
-                  dropdownValue = val!;
-                  print(dropdownValue);
-                });
-              },
-            )),
+                  Center(
+                      child: DropdownButtonFormField(
+                    value: dropdownValue,
+                    icon: const Icon(Icons.arrow_drop_down_rounded),
+                    elevation: 2,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.grey),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                    },
+                    items: typeC.map((valueItem) {
+                      return DropdownMenuItem<String>(
+                        value: valueItem,
+                        child: Text(valueItem),
+                      );
+                    }).toList(),
+                  )),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(

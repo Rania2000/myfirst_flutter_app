@@ -21,6 +21,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   String dropdownValue = 'Personne Physique';
+  final List<String> type = ['Personne Physique', 'Personne Morale'];
   var firstname, lastname, adress, email, password, status, phone, cin;
   final _ConName = TextEditingController();
   final _ConPren = TextEditingController();
@@ -29,6 +30,7 @@ class _BodyState extends State<Body> {
   final _ConCIN = TextEditingController();
   final _Contlf = TextEditingController();
   final _ConPass = TextEditingController();
+  var _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -68,6 +70,7 @@ class _BodyState extends State<Body> {
                         return null;
                       },
                       controller: _ConName,
+                      keyboardType: TextInputType.name,
                       decoration: InputDecoration(
                           labelText: 'Nom',
                           labelStyle: TextStyle(
@@ -110,6 +113,7 @@ class _BodyState extends State<Body> {
                         }
                         return null;
                       },
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(
@@ -154,15 +158,24 @@ class _BodyState extends State<Body> {
                         dropdownValue = newValue!;
                       });
                     },
-                    items: [dropdownValue, 'Personne Morale']
-                        .map<DropdownMenuItem<String>>((valueItem) {
+                    items: type.map((valueItem) {
                       return DropdownMenuItem<String>(
                         value: valueItem,
                         child: Text(valueItem),
                       );
                     }).toList(),
                   )),
-
+/*value: 'hahaha',
+                    items: accountType.map((accountType) {
+                      return DropdownMenuItem(
+                        value: accountType,
+                        child: Text(accountType),
+                      );
+                    }).toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        _currentAccountType = val;
+                      });*/
                   TextFormField(
                       controller: _ConCIN,
                       validator: (String? value) {
@@ -171,6 +184,7 @@ class _BodyState extends State<Body> {
                         }
                         return null;
                       },
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           labelText: 'CIN / Immatricule ',
                           labelStyle: TextStyle(
@@ -190,6 +204,7 @@ class _BodyState extends State<Body> {
                         }
                         return null;
                       },
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                           labelText: 'Numéro tlf',
                           labelStyle: TextStyle(
@@ -203,19 +218,30 @@ class _BodyState extends State<Body> {
                       }),
                   TextField(
                       controller: _ConPass,
+                      obscureText: !_passwordVisible,
                       decoration: InputDecoration(
                           labelText: 'Mot De Passe  ',
                           labelStyle: TextStyle(
                               fontFamily: 'Montserrat',
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            color: kPrimaryLightColor,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: kPrimaryLightColor,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                _passwordVisible = !_passwordVisible;
+                              });
+                            },
                           ),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: kPrimaryColor))),
-                      obscureText: true,
                       onChanged: (val) {
                         password = val;
                       }),
@@ -239,9 +265,9 @@ class _BodyState extends State<Body> {
                     .then((val) {
                   Fluttertoast.showToast(
                       msg: 'user created successfully',
-                      toastLength: Toast.LENGTH_SHORT,
+                      toastLength: Toast.LENGTH_LONG,
                       gravity: ToastGravity.BOTTOM,
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.green,
                       textColor: Colors.white,
                       fontSize: 16.0);
                 });
@@ -249,7 +275,7 @@ class _BodyState extends State<Body> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return LoginSuccessScreenF();
+                      return LoginScreen();
                     },
                   ),
                 );
