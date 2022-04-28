@@ -3,14 +3,42 @@
 import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:signup/screens/Home/home_screen.dart';
 import 'package:signup/screens/Login/login_screen.dart';
 
 import 'package:signup/screens/Welcome/components/background.dart';
+import 'package:signup/screens/clientHome/home_screenClient.dart';
 import 'package:signup/screens/users/sign1.dart';
 import 'package:signup/screens/usersLogin/sign1.dart';
+import 'package:signup/shared/sharedPrefValues.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  checkIfTokenExists() async {
+    await getUserInfoSharedPref("token").then((token) async {
+      if (token != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreenF(),
+            settings: const RouteSettings(name: "/homePage"),
+          ),
+        );
+      }
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    checkIfTokenExists();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_declarations

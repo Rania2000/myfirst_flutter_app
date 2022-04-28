@@ -57,23 +57,23 @@ class Body extends StatelessWidget {
                   color: Color.fromARGB(255, 41, 35, 92),
                 ),
               )),
-          SizedBox(
-            width: size.width * 0.6,
-            child: RoundedButton(
-              text: "Retour",
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return DetailsScreen();
-                    },
-                  ),
-                );
-              },
-              color: kPrimaryColor,
-            ),
-          ),
+          // SizedBox(
+          //   width: size.width * 0.6,
+          //   child: RoundedButton(
+          //     text: "Retour",
+          //     press: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder: (context) {
+          //             return DetailsScreen();
+          //           },
+          //         ),
+          //       );
+          //     },
+          //     color: kPrimaryColor,
+          //   ),
+          // ),
         ],
       ),
     );

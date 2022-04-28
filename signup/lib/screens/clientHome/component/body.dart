@@ -34,6 +34,13 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    commadeCalls();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
     Size size = MediaQuery.of(context).size;

@@ -3,19 +3,22 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/models/commande.dart';
+import 'package:signup/services/Dio_service.dart';
 import 'package:signup/shared/sharedPrefValues.dart';
 
 class CommandeServices {
   static Future<List<Commande>> getListAllOrders() async {
     var token;
     var response;
-    Dio dio = new Dio();
+    //Dio Interceptor
+    var dio = DioUtil.getInstance();
+    //Dio dio = new Dio();
     final commandes = <Commande>[];
     token = getUserInfoSharedPref('token');
     print(token);
     dio.options.headers['Authorization'] = 'Bearer $token';
     response = await dio.get(baseUrl+'commande/');
-
+    print(response);
     if (response.statusCode == 200) {
       print(response);
       var data = jsonDecode(response.toString()) ;
@@ -32,7 +35,7 @@ class CommandeServices {
   static Future<int> addCommande(Commande commande) async {
     var url;
     var response;
-    var dio = new Dio();
+    var dio =  DioUtil.getInstance();
     var token = await getUserInfoSharedPref("token");
     dio.options.headers["Authorization"] = "Bearer " + token;
 

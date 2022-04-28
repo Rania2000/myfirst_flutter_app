@@ -114,14 +114,14 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return DetailsScreen();
-                                          },
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) {
+                                      //       return DetailsScreen();
+                                      //     },
+                                      //   ),
+                                      // );
                                     },
                                     child: Container(
                                       width: 130,
