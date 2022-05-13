@@ -16,22 +16,27 @@ class _CommandeComponentState extends State<CommandeComponent> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(commande: widget.commande,)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailsScreen(
+                      commande: widget.commande,
+                    )));
       },
       child: Container(
         margin: EdgeInsets.only(right: 0, top: 5),
         child: Row(
           children: [
             Container(
-              width: 130,
-              height: 130,
+              width: 110,
+              height: 110,
               decoration: BoxDecoration(
                   borderRadius: BorderRadiusDirectional.circular(20),
                   color: Colors.white,
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/food.jpg"))),
+                      image: AssetImage("assets/images/box.jpg"))),
             ),
             Expanded(
               child: Container(
@@ -48,7 +53,7 @@ class _CommandeComponentState extends State<CommandeComponent> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        widget.commande.article,
+                        widget.commande.titre,
                         style: TextStyle(
                           //height: 1.171875,
                           fontSize: 14.0,
@@ -58,7 +63,7 @@ class _CommandeComponentState extends State<CommandeComponent> {
                       ),
                       Text(
                         widget.commande.adrDepart +
-                            'à' +
+                            ' à ' +
                             widget.commande.adrArrive,
                         style: TextStyle(
                             //height: 1.171875,
@@ -93,7 +98,7 @@ class _CommandeComponentState extends State<CommandeComponent> {
                                 size: 16,
                               ),
                               //date format
-                              Text('1am',
+                              Text(widget.commande.date,
                                   style: TextStyle(
                                       //height: 1.171875,
                                       fontSize: 12)),

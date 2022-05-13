@@ -4,6 +4,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/models/commande.dart';
@@ -33,6 +35,7 @@ class _InputWrapperState extends State<InputWrapper> {
   TextEditingController arriveController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
+
   TextEditingController commentController = TextEditingController();
   DateTime _dateTime = DateTime.now();
   @override
@@ -60,7 +63,7 @@ class _InputWrapperState extends State<InputWrapper> {
                     child: TextField(
                       controller: commandeController,
                       decoration: InputDecoration(
-                          hintText: "Entrer votre commande",
+                          hintText: "Titre commande",
                           hintStyle: TextStyle(color: Colors.grey),
                           border: InputBorder.none),
                     ),
@@ -93,33 +96,6 @@ class _InputWrapperState extends State<InputWrapper> {
                           border: InputBorder.none),
                     ),
                   ),
-                  Column(
-                    children: [
-                      Text(_dateTime == null
-                          ? 'Nothing has been picked yet'
-                          : _dateTime.toString()),
-                      //Text('choisir une date de livraison'),
-                      SizedBox(height: 5),
-                      RaisedButton(
-                        child: Text('Pick a date'),
-                        onPressed: () {
-                          showDatePicker(
-                                  context: context,
-                                  // ignore: prefer_if_null_operators, unnecessary_null_comparison
-                                  initialDate: _dateTime == null
-                                      ? DateTime.now()
-                                      : _dateTime,
-                                  firstDate: DateTime(2022),
-                                  lastDate: DateTime(2023))
-                              .then((date) {
-                            setState(() {
-                              _dateTime = date!;
-                            });
-                          });
-                        },
-                      ),
-                    ],
-                  ),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(
@@ -134,25 +110,30 @@ class _InputWrapperState extends State<InputWrapper> {
                           border: InputBorder.none),
                     ),
                   ),
-                  Center(
-                      child: DropdownButtonFormField(
-                    value: dropdownValue,
-                    icon: const Icon(Icons.arrow_drop_down_rounded),
-                    elevation: 2,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.grey),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        dropdownValue = newValue!;
-                      });
-                    },
-                    items: typeC.map((valueItem) {
-                      return DropdownMenuItem<String>(
-                        value: valueItem,
-                        child: Text(valueItem),
-                      );
-                    }).toList(),
-                  )),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: lightbleu,
+                    ),
+                    child: Center(
+                        child: DropdownButtonFormField(
+                      value: dropdownValue,
+                      icon: const Icon(Icons.arrow_drop_down_rounded),
+                      elevation: 2,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownValue = newValue!;
+                        });
+                      },
+                      items: typeC.map((valueItem) {
+                        return DropdownMenuItem<String>(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                    )),
+                  ),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(
@@ -164,6 +145,44 @@ class _InputWrapperState extends State<InputWrapper> {
                           hintText: "delais de livraison",
                           hintStyle: TextStyle(color: Colors.grey),
                           border: InputBorder.none),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: lightbleu,
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                            _dateTime == null
+                                ? 'choisir une date de livraison'
+                                : DateFormat.yMMMEd().format(_dateTime),
+                            style: TextStyle(color: Colors.grey)),
+                        //Text('choisir une date de livraison'),
+                        SizedBox(width: 15),
+                        RaisedButton(
+                          color: kPrimaryLightColor,
+                          textColor: Colors.white,
+                          hoverColor: kPrimaryColor,
+                          child: Text('Choisir Date'),
+                          onPressed: () {
+                            showDatePicker(
+                                    context: context,
+                                    helpText: 'choisir une date de livraison',
+                                    // ignore: prefer_if_null_operators, unnecessary_null_comparison
+                                    initialDate: _dateTime == null
+                                        ? DateTime.now()
+                                        : _dateTime,
+                                    firstDate: DateTime(2022),
+                                    lastDate: DateTime(2023))
+                                .then((date) {
+                              setState(() {
+                                _dateTime = date!;
+                              });
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
                   Container(
@@ -220,8 +239,9 @@ class _InputWrapperState extends State<InputWrapper> {
         departController.text,
         arriveController.text,
         detailsController.text,
+        priceController.text,
+        DateFormat.MEd().format(_dateTime),
         '623c3c61ff083e1ae4e42e85',
-        '22-02-2022',
         'encours',
         'voiture');
 

@@ -8,7 +8,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  DetailsPage(
+      body: DetailsPage(
         commande: commande,
       ),
     );

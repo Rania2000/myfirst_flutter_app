@@ -3,6 +3,8 @@
 import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:signup/main_screen_nav.dart';
+import 'package:signup/main_screen_navF.dart';
 import 'package:signup/screens/Home/home_screen.dart';
 import 'package:signup/screens/Login/login_screen.dart';
 
@@ -26,19 +28,21 @@ class _BodyState extends State<Body> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const HomeScreenF(),
-            settings: const RouteSettings(name: "/homePage"),
+            builder: (context) => const MainScreenF(),
+            settings: const RouteSettings(name: "/mainPage"),
           ),
         );
       }
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
     checkIfTokenExists();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_declarations

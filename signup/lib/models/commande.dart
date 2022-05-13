@@ -1,26 +1,30 @@
 class Commande {
   final id;
   final String numCommande;
-  final String article;
+  final String titre;
+  //final String article;
   final String typeCommande;
   final String caracters;
   final String typeVehicule;
   final String adrDepart;
   final String adrArrive;
   final String status;
-  final  customerId; 
+  final String prix;
+  final customerId;
   final String date;
 
   Commande(
       this.id,
       this.numCommande,
-      this.article,
+      this.titre,
+      //   this.article,
       this.typeCommande,
       this.adrArrive,
       this.adrDepart,
       this.caracters,
       this.customerId,
       this.date,
+      this.prix,
       this.status,
       this.typeVehicule);
 
@@ -28,6 +32,7 @@ class Commande {
     return <String, dynamic>{
       '_id': id,
       'numCommande': numCommande,
+      'titre': titre,
       'typecomm': typeCommande,
       'caracteristique': caracters,
       'typevehicule': typeVehicule,
@@ -38,6 +43,7 @@ class Commande {
         "_id": customerId,
       },
       'date': date,
+      'prix': prix,
     };
   }
 
@@ -45,7 +51,8 @@ class Commande {
     return Commande(
       json['_id'].toString(),
       json['numCommande'].toString(),
-      json['article'].toString(),
+      json['titre'].toString(),
+      //json['article'].toString(),
       json['typecomm'].toString(),
       json['adresse_depart'].toString(),
       json['adresse_arrive'].toString(),
@@ -54,6 +61,7 @@ class Commande {
       json['date'].toString(),
       json['status'].toString(),
       json['typevehicule'].toString(),
+      json['prix'].toString(),
     );
   }
 }

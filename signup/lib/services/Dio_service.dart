@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/shared/sharedPrefValues.dart';
 
-
 class DioUtil {
   static Dio? _instance;
 
@@ -20,14 +19,16 @@ class DioUtil {
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       return handler.next(options); //modify your request
     }, onResponse: (response, handler) {
-      if (response != null) { //on success it is getting called here
+      if (response != null) {
+        //on success it is getting called here
         return handler.next(response);
       } else {
         return null;
       }
     }, onError: (DioError e, handler) async {
       if (e.response != null) {
-        if (e.response!.statusCode == 401) { //catch the 401 here
+        if (e.response!.statusCode == 401) {
+          //catch the 401 here
 
           RequestOptions requestOptions = e.requestOptions;
           await refreshToken();
@@ -54,7 +55,8 @@ class DioUtil {
     }));
     return dio;
   }
-  static  Map<String, String> headers = {
+
+  static Map<String, String> headers = {
     "Content-type": "application/json",
   };
 
@@ -69,7 +71,8 @@ class DioUtil {
     // final options =  Options(
     //   headers: dio.options.headers["x-refresh-token"]=refreshToken,
     // );
-    dio.options.headers!["x-refresh-token"] = refreshToken;
+    dio.options.headers["x-refresh-token"] =
+        refreshToken; // i removed the ! cuz it can't be null
     print(dio.options.headers);
 
     Response response = await dio.postUri(apiUrl);
@@ -80,7 +83,8 @@ class DioUtil {
       var refreshTokenResponse = response.data;
       String cookie = response.headers['x-refresh-token'].toString();
       print('**************Dio***********');
-      await saveAccessTokenSharedPref(refreshTokenResponse['accessToken'],cookie);
+      await saveAccessTokenSharedPref(
+          refreshTokenResponse['accessToken'], cookie);
       print(refreshTokenResponse);
     } else {
       print('**************Dio***********');
@@ -89,7 +93,6 @@ class DioUtil {
       print(response.data); //TODO: logout
     }
   }
-
 
 // static void updateCookie(Response response) {
 //   String? rawCookie = response.headers['set-cookie'] as String?;
