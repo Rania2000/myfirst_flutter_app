@@ -1,4 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+import 'package:signup/constants.dart';
 import 'package:signup/screens/editprofile/settings.dart';
 
 class SettingsUI extends StatelessWidget {
@@ -26,11 +29,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 1,
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.purple,
-          ),
+          icon: const Icon(Icons.arrow_back, color: Colors.grey),
           onPressed: () {},
+        ),
+        centerTitle: true,
+        title: Text(
+          "Edit Profile",
+          style: TextStyle(
+              height: 1.171875,
+              fontSize: 14.0,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w900,
+              letterSpacing: 2.0,
+              color: myGrey),
         ),
         actions: [
           IconButton(
@@ -53,58 +64,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
           },
           child: ListView(
             children: [
-              const Text(
-                "Edit Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
               Center(
                 child: Stack(
                   children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: const Offset(0, 10))
-                          ],
-                          shape: BoxShape.circle,
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              //image:AssetImage(assetName)
-
-                              image: const NetworkImage(
-                                "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                              ))),
+                    Center(
+                      child: CircleAvatar(
+                        radius: 80,
+                        backgroundImage:
+                            AssetImage('assets/images/fournisseur.png'),
+                      ),
                     ),
-                    Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                            ),
-                            color: Colors.purple,
-                          ),
-                          child: const Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
-                        )),
                   ],
                 ),
               ),
@@ -117,7 +86,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               buildTextField("adresse", "oued elil", false),
               buildTextField("num TEL", "12345678", false),
               const SizedBox(
-                height: 35,
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,7 +104,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   RaisedButton(
                     onPressed: () {},
-                    color: Colors.purple,
+                    color: kPrimaryColor,
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     elevation: 2,
                     shape: RoundedRectangleBorder(
@@ -149,7 +118,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                   )
                 ],
-              )
+              ),
+              SizedBox(height: 30),
             ],
           ),
         ),

@@ -10,7 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:signup/components/rounded_button.dart';
 
 import 'package:signup/constants.dart';
-import 'package:signup/model/login_model.dart';
+
 import 'package:signup/screens/Login/components/background.dart';
 import 'package:signup/screens/login_success/login_sucess_screen.dart';
 import 'package:signup/screens/login_successF/login_sucess_screen.dart';
@@ -113,11 +113,8 @@ class _BodyState extends State<Body> {
                               });
                             },
                           ),
-
-                         
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: kPrimaryColor))),
-                     
                       onChanged: (val) {
                         password = val;
                       }),

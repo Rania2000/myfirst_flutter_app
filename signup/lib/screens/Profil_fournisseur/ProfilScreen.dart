@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/screens/Profil/info_card.dart';
+import 'package:signup/screens/editprofile/edit_profile.dart';
 
 // our data
 
@@ -39,7 +40,16 @@ class ProfilPageF extends StatelessWidget {
                 Icons.edit,
                 color: myGrey,
               ),
-              onPressed: () {},
+               onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return EditProfilePage();
+                    },
+                  ),
+                );
+              },
               // onPressed: () => Navigator.of(context).pop(null),
             ),
           ],

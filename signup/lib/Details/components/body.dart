@@ -108,7 +108,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           width: 40,
                         ),
                         Text(
-                          widget.commande.numCommande,
+                          '${widget.commande.prix}DT',
                           style: TextStyle(
                               //height: 1.171875,
                               fontSize: 24,
@@ -160,7 +160,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           color: myGrey),
                     ),
                     Text(
-                      'Description: ${widget.commande.typeCommande} ',
+                      'type commande : ${widget.commande.typeCommande} ',
                       style: TextStyle(
                           //height: 1.171875,
                           fontSize: 12,
@@ -170,9 +170,16 @@ class _DetailsPageState extends State<DetailsPage> {
                           color: myGrey),
                     ),
                     SingleChildScrollView(
-                      child: ExpandableTextWidget(
-                          text:
-                              " Voici un bel assemblage de freesias, colorés et parfumés, spécialement confectionné par votre fleuriste Foliflora Le parfum de ces fleurs est très semblable à celui du jasmin, et il est d ailleurs de plus en plus souvent utilisé comme note de cœur par les créateurs de parfums !Ces magnifiques freesias proviennent d'un producteur local. Ils sont livrés en bouton, gage d'une extrême fraîcheur, pour que vous puissiez les voir s’épanouir pleinement chez vous, et puissiez en profiter bien plus longtemps !Des fleurs à offrir sans modération !"),
+                      child: Text(
+                        'Description: ${widget.commande.caracters}',
+                        style: TextStyle(
+                            //height: 1.171875,
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.25,
+                            color: myGrey),
+                      ),
                     ),
                     SizedBox(
                       height: 30,

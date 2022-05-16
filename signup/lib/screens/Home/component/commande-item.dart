@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:signup/Details/DetailsScreen.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/models/commande.dart';
+import 'package:signup/screens/Profil_fournisseur/ProfilScreen.dart';
+import 'package:signup/utils/dimension.dart';
 
 class CommandeComponent extends StatefulWidget {
   final Commande commande;
@@ -13,6 +15,10 @@ class CommandeComponent extends StatefulWidget {
 }
 
 class _CommandeComponentState extends State<CommandeComponent> {
+  String formatDateTime(DateTime dateTime) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -32,7 +38,8 @@ class _CommandeComponentState extends State<CommandeComponent> {
               width: 110,
               height: 110,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadiusDirectional.circular(20),
+                  borderRadius:
+                      BorderRadiusDirectional.circular(Dimensions.size20),
                   color: Colors.white,
                   image: DecorationImage(
                       fit: BoxFit.cover,
@@ -52,14 +59,33 @@ class _CommandeComponentState extends State<CommandeComponent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        widget.commande.titre,
-                        style: TextStyle(
-                          //height: 1.171875,
-                          fontSize: 14.0,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w700,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            widget.commande.titre,
+                            style: TextStyle(
+                              //height: 1.171875,
+                              fontSize: 14.0,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(width: 60),
+                          IconButton(
+                              alignment: Alignment(0, -1),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return ProfilPageF();
+                                    },
+                                  ),
+                                );
+                              },
+                              icon: Icon(Icons.edit),
+                              color: kPrimaryLightColor),
+                        ],
                       ),
                       Text(
                         widget.commande.adrDepart +
@@ -79,12 +105,12 @@ class _CommandeComponentState extends State<CommandeComponent> {
                               Icon(
                                 Icons.place_rounded,
                                 color: kPrimaryColor,
-                                size: 16,
+                                size: 13,
                               ),
                               Text(widget.commande.adrDepart,
                                   style: TextStyle(
                                       //height: 1.171875,
-                                      fontSize: 12)),
+                                      fontSize: 11)),
                             ],
                           ),
                           SizedBox(
@@ -95,23 +121,26 @@ class _CommandeComponentState extends State<CommandeComponent> {
                               Icon(
                                 Icons.timer,
                                 color: kPrimaryColor,
-                                size: 16,
+                                size: 13,
                               ),
                               //date format
-                              Text(widget.commande.date,
+                              Text(
+                                  formatDateTime(
+                                    DateTime.parse(widget.commande.date),
+                                  ),
                                   style: TextStyle(
                                       //height: 1.171875,
-                                      fontSize: 12)),
+                                      fontSize: 11)),
                             ],
                           ),
                           SizedBox(
                             width: 10,
                           ),
                           Text(
-                            widget.commande.numCommande,
+                            widget.commande.prix + "DT",
                             style: TextStyle(
                                 //height: 1.171875,
-                                fontSize: 24,
+                                fontSize: 16,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w900,
                                 color: kPrimaryColor),
