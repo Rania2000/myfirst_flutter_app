@@ -12,7 +12,8 @@ class EditScreen extends StatefulWidget {
   final commande;
   final bool isEditing;
 
-  EditScreen({Key? key, this.commande,required this.isEditing}) : super(key: key);
+  EditScreen({Key? key, this.commande, required this.isEditing})
+      : super(key: key);
   @override
   State<EditScreen> createState() => _EditScreenState();
 }
@@ -38,6 +39,7 @@ class _EditScreenState extends State<EditScreen> {
               height: 80,
             ),
             Header(isEditing: widget.isEditing,),
+            Header(commandeID: '', isEditing: false),
             Expanded(
                 child: Container(
               decoration: BoxDecoration(
@@ -46,7 +48,10 @@ class _EditScreenState extends State<EditScreen> {
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
                   )),
-              child: InputWrapper(isEditing: widget.isEditing,commande:widget.commande ,),
+              child: InputWrapper(
+                  isEditing: widget.isEditing,
+                commande: widget.commande,
+              ),
             )),
           ],
         ),
