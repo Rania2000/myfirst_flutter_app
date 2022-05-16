@@ -9,6 +9,8 @@ import 'package:signup/main_screen_navF.dart';
 import 'package:signup/screens/Home/home_screen.dart';
 
 class Body extends StatelessWidget {
+  final bool isClient;
+  Body({required this.isClient});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -70,7 +72,7 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return MainScreenF();
+                      return MainScreenF(isClient: isClient,);
                     },
                   ),
                 );

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import 'package:signup/constants.dart';
@@ -10,6 +10,8 @@ import 'package:signup/services/commande_service.dart';
 
 // ignore: use_key_in_widget_constructors
 class Body extends StatefulWidget {
+ final bool isClient;
+ Body({Key? key, required this.isClient}) : super(key: key);
   @override
   State<Body> createState() => _BodyState();
 }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/models/livreur.dart';
+import 'package:signup/shared/sharedPrefValues.dart';
 
 /*****get all livreurs *******/
 
@@ -29,20 +30,20 @@ class LivreurServices {
 
   /*****get specific commande with id *******/
 
-  static Future<List<Livreur>> getspecificlivreur(livreurId) async {
+  static Future<Livreur> getspecificlivreur(livreurId) async {
     var response;
     Dio dio = new Dio();
-    final livreur = <Livreur>[];
-    dio.options.headers['Authorization'] = 'Bearer $livreurId';
-    response = await dio.get(baseUrl + 'livreur/$livreurId');
+    var livreur;
+    var userId=await getUserInfoSharedPref('id');
+    var token = await getUserInfoSharedPref("token");
+    dio.options.headers['Authorization'] = 'Bearer $token';
+    response = await dio.get(baseUrl + 'livreur/$userId');
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       print(data);
-      for (var item in data) {
-        livreur.add(Livreur.fromJson(item));
-      }
+      livreur= Livreur.fromJson(data);
     }
-    return livreur.toList();
+    return livreur;
   }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:signup/constants.dart';
+import 'package:signup/models/client.dart';
 import 'package:signup/screens/Profil/info_card.dart';
+import 'package:signup/screens/Welcome/welcome_screen.dart';
 import 'package:signup/screens/editprofile/edit_profile.dart';
+import 'package:signup/services/clientServices.dart';
+import 'package:signup/shared/sharedPrefValues.dart';
 
 // our data
 
@@ -14,9 +18,38 @@ const type_voiture = "Ford camaro";
 const Compte_bancaire = "Num RIB";
 const autre_info = "autre info";
 
-class ProfilPageF extends StatelessWidget {
+class ProfilPageF extends StatefulWidget {
   static const IconData airport_shuttle_rounded =
       IconData(0xf54f, fontFamily: 'MaterialIcons');
+
+  @override
+  State<ProfilPageF> createState() => _ProfilPageFState();
+}
+
+class _ProfilPageFState extends State<ProfilPageF> {
+  bool isInCall=false;
+  var client;
+  getClientProfile()async{
+    setState(() {
+      isInCall = true;
+    });
+    ClientServices.getspecificClient().then((res) {
+      // i added "token" as variable
+      setState(() {
+        client = res;
+      });
+    });
+    setState(() {
+      isInCall = false;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getClientProfile();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -198,9 +231,15 @@ class ProfilPageF extends StatelessWidget {
                               color: Colors.white30,
                             ),
                           ),
-                          InfoCard(
-                            text: autre_info,
-                            icon: Icons.more,
+                          GestureDetector(
+                            onTap: (){
+                              deleteToken();
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomeScreen()));
+                            },
+                            child: InfoCard(
+                              text: autre_info,
+                              icon: Icons.more,
+                            ),
                           ),
                         ],
                       ),

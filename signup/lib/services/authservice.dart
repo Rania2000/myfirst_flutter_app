@@ -17,7 +17,8 @@ class AuthService {
       print(response.headers['Authorization'].toString());
       var token = response.data['token'];
       var refreshToken = response.headers['Authorization'];
-      saveAccessTokenSharedPref(token, refreshToken.toString());
+      var userId=response.data['id'];
+      saveAccessTokenSharedPref(token, refreshToken.toString(),userId);
       return response;
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -39,7 +40,8 @@ class AuthService {
       print(response.headers['Authorization'].toString());
       var token = response.data['token'];
       var refreshToken = response.headers['Authorization'];
-      saveAccessTokenSharedPref(token, refreshToken.toString());
+      var userId=response.data['id'];
+      saveAccessTokenSharedPref(token, refreshToken.toString(),userId);
       return response;
     } on DioError catch (e) {
       Fluttertoast.showToast(
