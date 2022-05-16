@@ -52,6 +52,12 @@ class _InputWrapperState extends State<InputWrapper> {
   DateTime _dateTime = DateTime.now();
   
   @override
+  void initState() {
+    // TODO: implement initState
+    widget.isEditing?commandeController.text=widget.commande.titre:commentController.text='';
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(

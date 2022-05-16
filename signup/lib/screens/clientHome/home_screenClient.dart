@@ -4,7 +4,8 @@ import 'package:signup/constants.dart';
 import 'package:signup/screens/clientHome/component/body.dart';
 
 class HomeScreenF extends StatelessWidget {
-  const HomeScreenF({Key? key}) : super(key: key);
+  final bool isClient;
+  HomeScreenF({Key? key,required this.isClient}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class HomeScreenF extends StatelessWidget {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              child: Body(),
+              child: Body(isClient: isClient,),
             ),
           ),
         ],

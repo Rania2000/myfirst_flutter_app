@@ -82,9 +82,10 @@ class DioUtil {
       print(response.data);
       var refreshTokenResponse = response.data;
       String cookie = response.headers['x-refresh-token'].toString();
+      var userId=await getUserInfoSharedPref('id');
       print('**************Dio***********');
       await saveAccessTokenSharedPref(
-          refreshTokenResponse['accessToken'], cookie);
+          refreshTokenResponse['accessToken'], cookie,userId);
       print(refreshTokenResponse);
     } else {
       print('**************Dio***********');

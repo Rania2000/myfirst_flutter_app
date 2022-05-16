@@ -1,9 +1,10 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-saveAccessTokenSharedPref(String token,String refreshToken) async {
+saveAccessTokenSharedPref(String token,String refreshToken,String id) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('token', token);
   await prefs.setString('refresh_token', refreshToken);
+  await prefs.setString('id', id);
 }
 
 getUserInfoSharedPref(String key) async {

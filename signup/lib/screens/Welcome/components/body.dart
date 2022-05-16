@@ -28,7 +28,7 @@ class _BodyState extends State<Body> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const MainScreenF(),
+            builder: (context) => MainScreenF(isClient: true,),
             settings: const RouteSettings(name: "/mainPage"),
           ),
         );

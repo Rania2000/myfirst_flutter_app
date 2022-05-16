@@ -23,7 +23,7 @@ class CommandeServices {
       print(response);
       var data = jsonDecode(response.toString()) ;
       print(data);//  print(data);
-      for (var item in data['orders']) {
+      for (var item in data) {
         commandes.add(Commande.fromJson(item));
       }
     }
