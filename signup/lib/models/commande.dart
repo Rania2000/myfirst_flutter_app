@@ -4,14 +4,16 @@ class Commande {
   final String titre;
   //final String article;
   final String typeCommande;
-  final String caracters;
-  final String typeVehicule;
-  final String adrDepart;
   final String adrArrive;
-  final String status;
-  final String prix;
-  final customerId;
+  final String adrDepart;
+  final String caracters;
+  final String customerId;
+  final String livreurId;
   final String date;
+  final String prix;
+  final String status;
+  final String typeVehicule;
+  final String code;
 
   Commande(
       this.id,
@@ -19,31 +21,35 @@ class Commande {
       this.titre,
       //   this.article,
       this.typeCommande,
-      this.adrArrive,
       this.adrDepart,
+      this.adrArrive,
       this.caracters,
       this.customerId,
+      this.livreurId,
       this.date,
-      this.prix,
       this.status,
-      this.typeVehicule);
+      this.prix,
+      this.typeVehicule,
+      this.code);
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       '_id': id,
       'numCommande': numCommande,
       'titre': titre,
-      'typecomm': typeCommande,
-      'caracteristique': caracters,
-      'typevehicule': typeVehicule,
+      'typec': typeCommande,
       'adresse_depart': adrDepart,
-      'adresse_arrive': adrDepart,
-      'status': status,
+      'adresse_arrive': adrArrive,
+      'caracteristique': caracters,
       'customer_id': {
         "_id": customerId,
       },
+      'livreur_id': livreurId,
       'date': date,
+      'status': status,
       'prix': prix,
+      'typevehicule': typeVehicule,
+      'code': code,
     };
   }
 
@@ -53,15 +59,17 @@ class Commande {
       json['numCommande'].toString(),
       json['titre'].toString(),
       //json['article'].toString(),
-      json['typecomm'].toString(),
+      json['typec'].toString(),
       json['adresse_depart'].toString(),
       json['adresse_arrive'].toString(),
       json['caracteristique'].toString(),
       json['customer_id'].toString(),
+      json['livreur_id'].toString(),
       json['date'].toString(),
       json['status'].toString(),
-      json['typevehicule'].toString(),
       json['prix'].toString(),
+      json['typevehicule'].toString(),
+      json['code'].toString(),
     );
   }
 }

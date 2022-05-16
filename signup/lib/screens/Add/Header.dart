@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget {
+  final bool isEditing;
+  Header({Key? key, required this.isEditing}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children:  <Widget>[
           Center(
             child: Text(
-              "Ajouter une Commande",
+              isEditing?"modifier la commande":"Ajouter une Commande",
               style: TextStyle(
                 height: 1.411764705882353,
                 fontSize: 24.0,
@@ -27,7 +29,7 @@ class Header extends StatelessWidget {
           ),
           Center(
             child: Text(
-              "veuillez remplir les champs ",
+              isEditing?"veuillez modifier les champs":"veuillez remplir les champs ",
               style: TextStyle(
                 height: 1.411764705882353,
                 fontSize: 18.0,

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:signup/Details/detailsScreen.dart';
 import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
+import 'package:signup/screens/Home/home_screen.dart';
+import 'package:signup/screens/clientHome/home_screenClient.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -31,7 +33,7 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(60, 0, 0, 0),
               alignment: Alignment.centerLeft,
               child: Text(
-                'La livraison est pour',
+                'La livraison est ',
                 overflow: TextOverflow.visible,
                 textAlign: TextAlign.left,
                 style: TextStyle(
@@ -46,7 +48,7 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(60, 0, 0, 0),
               alignment: Alignment.centerLeft,
               child: Text(
-                'vous !',
+                'pour vous !',
                 overflow: TextOverflow.visible,
                 textAlign: TextAlign.left,
                 style: TextStyle(
@@ -57,23 +59,23 @@ class Body extends StatelessWidget {
                   color: Color.fromARGB(255, 41, 35, 92),
                 ),
               )),
-          // SizedBox(
-          //   width: size.width * 0.6,
-          //   child: RoundedButton(
-          //     text: "Retour",
-          //     press: () {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) {
-          //             return DetailsScreen();
-          //           },
-          //         ),
-          //       );
-          //     },
-          //     color: kPrimaryColor,
-          //   ),
-          // ),
+          SizedBox(
+            width: size.width * 0.6,
+            child: RoundedButton(
+              text: "Retour",
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HomeScreen();
+                    },
+                  ),
+                );
+              },
+              color: kPrimaryColor,
+            ),
+          ),
         ],
       ),
     );

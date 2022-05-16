@@ -2,7 +2,12 @@
 
 import 'package:flutter/material.dart';
 
-class OrderDelete extends StatelessWidget {
+class OrderDelete extends StatefulWidget {
+  @override
+  State<OrderDelete> createState() => _OrderDeleteState();
+}
+
+class _OrderDeleteState extends State<OrderDelete> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

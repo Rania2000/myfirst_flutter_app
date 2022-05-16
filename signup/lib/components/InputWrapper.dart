@@ -14,6 +14,10 @@ import 'package:signup/services/commande_service.dart';
 import 'InputField.dart';
 
 class InputWrapper extends StatefulWidget {
+
+  final commande;
+  final bool isEditing;
+  InputWrapper({required this.isEditing,this.commande});
   @override
   State<InputWrapper> createState() => _InputWrapperState();
 }
@@ -21,6 +25,14 @@ class InputWrapper extends StatefulWidget {
 class _InputWrapperState extends State<InputWrapper> {
   bool isInCall = false;
   String dropdownValue = 'Alimentaire';
+  String dropdownValue2 = 'voiture';
+  final List<String> typeV = [
+    'voiture',
+    'Moteur',
+    'bicyclette',
+    'camion',
+    'Any'
+  ];
   final List<String> typeC = [
     'Alimentaire',
     'Médicament',
@@ -44,6 +56,7 @@ class _InputWrapperState extends State<InputWrapper> {
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(
+          // mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const SizedBox(
               height: 40,
@@ -52,6 +65,7 @@ class _InputWrapperState extends State<InputWrapper> {
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(5)),
               child: Column(
+                // mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Container(
                     padding: const EdgeInsets.all(10),
@@ -173,6 +187,7 @@ class _InputWrapperState extends State<InputWrapper> {
                                     initialDate: _dateTime == null
                                         ? DateTime.now()
                                         : _dateTime,
+                                    // : DateTime.now(),
                                     firstDate: DateTime(2022),
                                     lastDate: DateTime(2023))
                                 .then((date) {
@@ -184,6 +199,30 @@ class _InputWrapperState extends State<InputWrapper> {
                         ),
                       ],
                     ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: lightbleu,
+                    ),
+                    child: Center(
+                        child: DropdownButtonFormField(
+                      value: dropdownValue2,
+                      icon: const Icon(Icons.arrow_drop_down_rounded),
+                      elevation: 2,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownValue2 = newValue!;
+                        });
+                      },
+                      items: typeV.map((valueItem) {
+                        return DropdownMenuItem<String>(
+                          value: valueItem,
+                          child: Text(valueItem),
+                        );
+                      }).toList(),
+                    )),
                   ),
                   Container(
                     padding: const EdgeInsets.all(10),
@@ -231,19 +270,24 @@ class _InputWrapperState extends State<InputWrapper> {
       isInCall = false;
     });
     var numCommande = rng.nextInt(10000000);
+    var code = rng.nextInt(100000);
+
     Commande commande = Commande(
         '0',
-        'C${numCommande}',
+        'L${numCommande}',
         commandeController.text,
         dropdownValue,
         departController.text,
         arriveController.text,
-        detailsController.text,
-        priceController.text,
-        DateFormat.MEd().format(_dateTime),
+        commentController.text,
+        //DateFormat.MEd().format(_dateTime),
         '623c3c61ff083e1ae4e42e85',
+        '623da357b6f6d6d6932626b1',
+        _dateTime.toString(),
         'encours',
-        'voiture');
+        priceController.text,
+        dropdownValue2,
+        code.toString());
 
     CommandeServices.addCommande(commande).then((value) {
       print(value);

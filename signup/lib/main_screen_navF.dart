@@ -29,7 +29,7 @@ class _MainScreenFState extends State<MainScreenF> {
   final Screen = [
     HomeScreenF(),
     WalletScreen(),
-    EditScreen(),
+    EditScreen(isEditing: false,),
     NotifScreen(),
     ProfilPageF()
   ];

@@ -170,6 +170,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.2.0"
+<<<<<<< HEAD
   geocoder:
     dependency: "direct main"
     description:
@@ -191,6 +192,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+=======
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.6.1"
+>>>>>>> 89d4effeae97dfc12fa1bfa2f2ca23d7a08f4f4a
   google_maps_flutter:
     dependency: "direct main"
     description:
