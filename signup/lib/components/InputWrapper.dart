@@ -47,9 +47,14 @@ class _InputWrapperState extends State<InputWrapper> {
   TextEditingController arriveController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-
   TextEditingController commentController = TextEditingController();
   DateTime _dateTime = DateTime.now();
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.isEditing?commandeController.text=widget.commande.titre:commentController.text='';
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
