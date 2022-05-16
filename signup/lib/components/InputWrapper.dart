@@ -47,9 +47,10 @@ class _InputWrapperState extends State<InputWrapper> {
   TextEditingController arriveController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-
   TextEditingController commentController = TextEditingController();
+
   DateTime _dateTime = DateTime.now();
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -75,7 +76,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: commandeController,
+                      controller: isEditing ? widget.commande.titre :commandeController,
                       decoration: InputDecoration(
                           hintText: "Titre commande",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -89,7 +90,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: departController,
+                      controller: isEditing ? widget.commande.AdrDepart : departController,
                       decoration: InputDecoration(
                           hintText: "point de départ",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -103,7 +104,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: arriveController,
+                      controller: isEditing ? widget.commande.AdrArrive :arriveController,
                       decoration: InputDecoration(
                           hintText: "point d'arrivé",
                           hintStyle: TextStyle(color: Colors.grey),
