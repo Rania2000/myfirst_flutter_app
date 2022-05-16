@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:signup/components/expandable_widget.dart';
 import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
@@ -16,6 +18,57 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+var coordinates;
+List<Marker> allMarkers = [];
+late BitmapDescriptor customIcon;
+GoogleMapController? _controller;
+String? _mapStyle;
+
+bool show = false;
+  getCoordinates(var query) async {
+    var addresses = [];
+    var first;
+    addresses = await Geocoder.local.findAddressesFromQuery(query);
+    first = await addresses.first;
+    coordinates = await first.coordinates;
+    print("${first.countryName} : ${first.coordinates},${first.featureName}");
+    setState(() {
+      show = true;
+    });
+    return coordinates;
+  }
+
+void setCustomMapPin() async {
+  customIcon = await BitmapDescriptor.fromAssetImage(
+      ImageConfiguration(devicePixelRatio: 2.5),
+      'assets/image/icon/marker.png');
+}
+
+setMarker(query) async {
+  Coordinates coordinates = await getCoordinates(query);
+  allMarkers.add(Marker(
+      icon: BitmapDescriptor.defaultMarkerWithHue(
+        BitmapDescriptor.hueViolet,
+      ),
+      markerId: MarkerId(widget.commande.adrDepart),
+      draggable: false,
+      infoWindow: InfoWindow(
+          title: widget.commande.titre, snippet: widget.commande.adrDepart),
+      position: LatLng(coordinates.latitude, coordinates.longitude)));
+}
+void _onMapCreated(GoogleMapController controller) {
+  _controller = controller;
+}
+
+@override
+  void initState() {
+    // TODO: implement initState
+  getCoordinates(widget.commande.adrDepart);
+  setCustomMapPin();
+  setMarker(widget.commande.adrDepart);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,10 +83,34 @@ class _DetailsPageState extends State<DetailsPage> {
                 color: Colors.grey,
                 width: double.maxFinite,
                 height: 350,
-                child: Image.asset(
-                  "assets/images/map.jpg",
-                  fit: BoxFit.cover,
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  initialCameraPosition: CameraPosition(
+                      target: LatLng(
+                          coordinates.latitude, coordinates.longitude),
+                      zoom: 16.0),
+
+                  // markers: markers,
+                  onTap: (pos) {
+                    print(pos);
+                    Marker m = Marker(
+                        markerId: MarkerId('1'),
+                        icon: customIcon,
+                        position: pos);
+                    setState(() {
+                      allMarkers.add(m);
+                    });
+                  },
+                  markers: Set.from(allMarkers),
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller = controller;
+                    _controller!.setMapStyle(_mapStyle);
+                  },
                 ),
+                // child: Image.asset(
+                //   "assets/images/map.jpg",
+                //   fit: BoxFit.cover,
+                // ),
                 // decoration: BoxDecoration(
                 //     image: DecorationImage(
                 //         fit: BoxFit.cover,
