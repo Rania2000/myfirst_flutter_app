@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatefulWidget {
+  final String commandeID;
   final bool isEditing;
-  Header({Key? key, required this.isEditing}) : super(key: key);
+  // bool get isEditing => commandeID != null;
+  Header({required this.commandeID, required this.isEditing});
+
+  @override
+  State<Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children:  <Widget>[
+        children: <Widget>[
           Center(
             child: Text(
-              isEditing?"modifier la commande":"Ajouter une Commande",
+              widget.isEditing ? 'Edit' : "Ajouter une Commande",
               style: TextStyle(
                 height: 1.411764705882353,
                 fontSize: 24.0,
@@ -29,7 +37,7 @@ class Header extends StatelessWidget {
           ),
           Center(
             child: Text(
-              isEditing?"veuillez modifier les champs":"veuillez remplir les champs ",
+              isEditing ? "veuillez modifier les champs":"veuillez remplir les champs ",
               style: TextStyle(
                 height: 1.411764705882353,
                 fontSize: 18.0,
