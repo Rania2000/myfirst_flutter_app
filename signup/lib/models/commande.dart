@@ -8,7 +8,7 @@ class Commande {
   final String adrDepart;
   final String caracters;
   final String customerId;
-  final String livreurId;
+  var livreurId;
   final String date;
   final String prix;
   final String status;
@@ -41,9 +41,7 @@ class Commande {
       'adresse_depart': adrDepart,
       'adresse_arrive': adrArrive,
       'caracteristique': caracters,
-      'customer_id': {
-        "_id": customerId,
-      },
+      'customer_id': customerId,
       'livreur_id': livreurId,
       'date': date,
       'status': status,
@@ -54,6 +52,7 @@ class Commande {
   }
 
   factory Commande.fromJson(Map<String, dynamic> json) {
+
     return Commande(
       json['_id'].toString(),
       json['numCommande'].toString(),
@@ -65,7 +64,8 @@ class Commande {
       json['caracteristique'].toString(),
       json['customer_id'].toString(),
       json['livreur_id'].toString(),
-      json['date'].toString(),
+      //livreur,
+      json['date'].toString()==null?'2022-05-15T21:19:44.580Z':json['date'].toString(),
       json['status'].toString(),
       json['prix'].toString(),
       json['typevehicule'].toString(),

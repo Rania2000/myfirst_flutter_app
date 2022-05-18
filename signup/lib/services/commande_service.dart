@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:signup/constants.dart';
@@ -18,16 +19,17 @@ class CommandeServices {
     print(token);
     dio.options.headers['Authorization'] = 'Bearer $token';
     response = await dio.get(baseUrl+'commande/');
-    print(response);
+   // print(response);
     if (response.statusCode == 200) {
-      print(response);
+      log(response.toString());
+      //print(response);
       var data = jsonDecode(response.toString()) ;
-      print(data);//  print(data);
-      for (var item in data) {
+      //print(data);//  print(data);
+      for (var item in data['orders']) {
         commandes.add(Commande.fromJson(item));
       }
     }
-    print(commandes);
+    //print(commandes);
     return commandes.toList();
   }
 

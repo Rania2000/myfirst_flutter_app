@@ -126,6 +126,7 @@ class _CommandeComponentState extends State<CommandeComponent> {
                               ),
                               //date format
                               Text(
+                                //widget.commande.date,
                                   formatDateTime(
                                     DateTime.parse(widget.commande.date),
                                   ),
