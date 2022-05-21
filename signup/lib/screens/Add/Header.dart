@@ -37,7 +37,9 @@ class _HeaderState extends State<Header> {
           ),
           Center(
             child: Text(
-              isEditing ? "veuillez modifier les champs":"veuillez remplir les champs ",
+              widget.isEditing
+                  ? "veuillez modifier les champs"
+                  : "veuillez remplir les champs ",
               style: TextStyle(
                 height: 1.411764705882353,
                 fontSize: 18.0,

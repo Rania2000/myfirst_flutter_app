@@ -38,7 +38,6 @@ class _EditScreenState extends State<EditScreen> {
             SizedBox(
               height: 80,
             ),
-            Header(isEditing: widget.isEditing,),
             Header(commandeID: '', isEditing: false),
             Expanded(
                 child: Container(

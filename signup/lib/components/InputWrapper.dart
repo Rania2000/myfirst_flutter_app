@@ -10,7 +10,6 @@ import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/models/commande.dart';
 import 'package:signup/services/commande_service.dart';
-
 import 'InputField.dart';
 
 class InputWrapper extends StatefulWidget {
@@ -55,6 +54,7 @@ class _InputWrapperState extends State<InputWrapper> {
   void initState() {
     // TODO: implement initState
     widget.isEditing?commandeController.text=widget.commande.titre:commentController.text='';
+     widget.isEditing?departController.text=widget.commande.AdrDepart:departController.text='';
     super.initState();
   }
   @override
@@ -82,7 +82,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: isEditing ? widget.commande.titre :commandeController,
+                      controller: widget.isEditing ? widget.commande.titre :commandeController,
                       decoration: InputDecoration(
                           hintText: "Titre commande",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -96,7 +96,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: isEditing ? widget.commande.AdrDepart : departController,
+                      controller: widget.isEditing ? widget.commande.AdrDepart : departController,
                       decoration: InputDecoration(
                           hintText: "point de départ",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -110,7 +110,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: isEditing ? widget.commande.AdrArrive :arriveController,
+                      controller: widget.isEditing ? widget.commande.AdrArrive :arriveController,
                       decoration: InputDecoration(
                           hintText: "point d'arrivé",
                           hintStyle: TextStyle(color: Colors.grey),
