@@ -43,7 +43,7 @@ class Commande {
       'caracteristique': caracters,
       'customer_id': customerId,
       'livreur_id': livreurId,
-      'date': date,
+      'date': date.toString(),
       'status': status,
       'prix': prix,
       'typevehicule': typeVehicule,

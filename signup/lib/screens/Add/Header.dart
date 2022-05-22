@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatefulWidget {
-  final String commandeID;
+  //final String commandeID;
   final bool isEditing;
   // bool get isEditing => commandeID != null;
-  Header({required this.commandeID, required this.isEditing});
+  Header({required this.isEditing});
 
   @override
   State<Header> createState() => _HeaderState();
@@ -37,7 +37,7 @@ class _HeaderState extends State<Header> {
           ),
           Center(
             child: Text(
-              isEditing ? "veuillez modifier les champs":"veuillez remplir les champs ",
+              widget.isEditing ? "veuillez modifier les champs":"veuillez remplir les champs ",
               style: TextStyle(
                 height: 1.411764705882353,
                 fontSize: 18.0,

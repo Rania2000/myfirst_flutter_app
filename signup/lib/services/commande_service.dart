@@ -47,4 +47,24 @@ class CommandeServices {
     });
     return response;
   }
+
+  static Future<int> editCommande(Commande commande,idCommande) async {
+    var url;
+    var response;
+    var dio = DioUtil.getInstance();
+   // await getUserInfoSharedPref("token").then((token) async {
+      print(commande.toJson());
+      print('${baseUrl}/commande/$idCommande');
+      return  await dio.patch('${baseUrl}commande/$idCommande',data:commande.toJson()).then((value){
+        print(value.data);
+        print(value.statusCode);
+
+        response= value.statusCode;
+        return response;
+
+      });
+  //  });
+    return response;
+
+  }
 }

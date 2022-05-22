@@ -19,13 +19,13 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-var coordinates;
-List<Marker> allMarkers = [];
-late BitmapDescriptor customIcon;
-GoogleMapController? _controller;
-String? _mapStyle;
+  var coordinates;
+  List<Marker> allMarkers = [];
+  late BitmapDescriptor customIcon;
+  GoogleMapController? _controller;
+  String? _mapStyle;
 
-bool show = false;
+  bool show = false;
   getCoordinates(var query) async {
     var addresses = [];
     var first;
@@ -39,34 +39,35 @@ bool show = false;
     return coordinates;
   }
 
-void setCustomMapPin() async {
-  customIcon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration(devicePixelRatio: 2.5),
-      'assets/image/icon/marker.png');
-}
+  void setCustomMapPin() async {
+    customIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'assets/image/icon/marker.png');
+  }
 
-setMarker(query) async {
-  Coordinates coordinates = await getCoordinates(query);
-  allMarkers.add(Marker(
-      icon: BitmapDescriptor.defaultMarkerWithHue(
-        BitmapDescriptor.hueViolet,
-      ),
-      markerId: MarkerId(widget.commande.adrDepart),
-      draggable: false,
-      infoWindow: InfoWindow(
-          title: widget.commande.titre, snippet: widget.commande.adrDepart),
-      position: LatLng(coordinates.latitude, coordinates.longitude)));
-}
-void _onMapCreated(GoogleMapController controller) {
-  _controller = controller;
-}
+  setMarker(query) async {
+    Coordinates coordinates = await getCoordinates(query);
+    allMarkers.add(Marker(
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueViolet,
+        ),
+        markerId: MarkerId(widget.commande.adrDepart),
+        draggable: false,
+        infoWindow: InfoWindow(
+            title: widget.commande.titre, snippet: widget.commande.adrDepart),
+        position: LatLng(coordinates.latitude, coordinates.longitude)));
+  }
 
-@override
+  void _onMapCreated(GoogleMapController controller) {
+    _controller = controller;
+  }
+
+  @override
   void initState() {
     // TODO: implement initState
-  getCoordinates(widget.commande.adrDepart);
-  setCustomMapPin();
-  setMarker(widget.commande.adrDepart);
+    getCoordinates(widget.commande.adrDepart);
+    setCustomMapPin();
+    setMarker(widget.commande.adrDepart);
     super.initState();
   }
 
@@ -87,8 +88,8 @@ void _onMapCreated(GoogleMapController controller) {
                 child: GoogleMap(
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
-                      target: LatLng(
-                          coordinates.latitude, coordinates.longitude),
+                      target:
+                          LatLng(coordinates.latitude, coordinates.longitude),
                       zoom: 16.0),
 
                   // markers: markers,

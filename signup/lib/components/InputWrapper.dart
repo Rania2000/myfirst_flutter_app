@@ -10,6 +10,7 @@ import 'package:signup/components/rounded_button.dart';
 import 'package:signup/constants.dart';
 import 'package:signup/models/commande.dart';
 import 'package:signup/services/commande_service.dart';
+import 'package:signup/shared/sharedPrefValues.dart';
 
 import 'InputField.dart';
 
@@ -55,6 +56,12 @@ class _InputWrapperState extends State<InputWrapper> {
   void initState() {
     // TODO: implement initState
     widget.isEditing?commandeController.text=widget.commande.titre:commentController.text='';
+    widget.isEditing?departController.text=widget.commande.adrDepart:departController.text='';
+    widget.isEditing?arriveController.text= widget.commande.adrArrive:arriveController.text='';
+    widget.isEditing?priceController.text=widget.commande.prix:priceController.text='';
+    widget.isEditing?commentController.text=widget.commande.code:commentController.text='';
+    dropdownValue=widget.commande.typeCommande??'Alimentaire';
+    dropdownValue2=widget.commande.typeVehicule??'voiture';
     super.initState();
   }
   @override
@@ -82,7 +89,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: isEditing ? widget.commande.titre :commandeController,
+                      controller: commandeController,
                       decoration: InputDecoration(
                           hintText: "Titre commande",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -96,7 +103,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: isEditing ? widget.commande.AdrDepart : departController,
+                      controller: departController,
                       decoration: InputDecoration(
                           hintText: "point de départ",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -110,7 +117,7 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: isEditing ? widget.commande.AdrArrive :arriveController,
+                      controller:arriveController,
                       decoration: InputDecoration(
                           hintText: "point d'arrivé",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -259,9 +266,9 @@ class _InputWrapperState extends State<InputWrapper> {
               height: 40,
             ),
             RoundedButton(
-              text: "Ajouter ",
+              text:widget.isEditing?"Modifier":"Ajouter ",
               press: () {
-                _addCommande();
+                widget.isEditing?_editList():_addCommande();
               },
             ),
           ],
@@ -278,7 +285,9 @@ class _InputWrapperState extends State<InputWrapper> {
     });
     var numCommande = rng.nextInt(10000000);
     var code = rng.nextInt(100000);
-
+    var userId= await getUserInfoSharedPref('id');
+    print(userId);
+    print(_dateTime);
     Commande commande = Commande(
         '0',
         'L${numCommande}',
@@ -288,9 +297,10 @@ class _InputWrapperState extends State<InputWrapper> {
         arriveController.text,
         commentController.text,
         //DateFormat.MEd().format(_dateTime),
-        '623c3c61ff083e1ae4e42e85',
+        //'623c3c61ff083e1ae4e42e85',
+        userId,
         '623da357b6f6d6d6932626b1',
-        _dateTime.toString(),
+        '2022-05-15T21:19:44.580Z',
         'encours',
         priceController.text,
         dropdownValue2,
@@ -307,6 +317,61 @@ class _InputWrapperState extends State<InputWrapper> {
             backgroundColor: Colors.green,
             textColor: Colors.white,
             fontSize: 16.0);
+      } else {
+        Fluttertoast.showToast(
+            msg: 'error occured',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    });
+
+    setState(() {
+      isInCall = true;
+    });
+  }
+
+  _editList() async {
+    setState(() {
+      isInCall = false;
+    });
+    var userId= await getUserInfoSharedPref('id');
+    print(widget.commande.id);
+     Commande commande = Commande(
+        widget.commande.id,
+        widget.commande.numCommande,
+        commandeController.text,
+        dropdownValue,
+        departController.text,
+        arriveController.text,
+        commentController.text,
+        //DateFormat.MEd().format(_dateTime),
+        //'623c3c61ff083e1ae4e42e85',
+        userId,
+        '',
+        _dateTime.toString(),
+        'encours',
+        priceController.text,
+        dropdownValue2,
+        widget.commande.code);
+
+
+    CommandeServices.editCommande(commande, widget.commande.id).then((value) {
+      print(value);
+      if (value == 200) {
+        Fluttertoast.showToast(
+            msg: 'commande modifiée avec sucées',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0);
+
+        Navigator.pop(context);
       } else {
         Fluttertoast.showToast(
             msg: 'error occured',

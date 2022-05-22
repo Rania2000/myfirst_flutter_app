@@ -36,13 +36,9 @@ class _CommandeComponentState extends State<CommandeComponent> {
         child: Row(
           children: [
             Container(
-<<<<<<< Updated upstream
               width: MediaQuery.of(context).size.width*0.28,
               height: MediaQuery.of(context).size.width*0.28,
-=======
-              width: MediaQuery.of(context).size.width * 0.28,
-              height: MediaQuery.of(context).size.width * 0.28,
->>>>>>> Stashed changes
+
               decoration: BoxDecoration(
                   borderRadius:
                       BorderRadiusDirectional.circular(20),
@@ -131,10 +127,10 @@ class _CommandeComponentState extends State<CommandeComponent> {
                               ),
                               //date format
                               Text(
-                                //widget.commande.date,
-                                  formatDateTime(
-                                    DateTime.parse(widget.commande.date),
-                                  ),
+                                widget.commande.date,
+                                //   formatDateTime(
+                                //     DateTime.parse(widget.commande.date),
+                                //   ),
                                   style: TextStyle(
                                       //height: 1.171875,
                                       fontSize: 11)),
