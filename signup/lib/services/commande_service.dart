@@ -18,12 +18,12 @@ class CommandeServices {
     token = getUserInfoSharedPref('token');
     print(token);
     dio.options.headers['Authorization'] = 'Bearer $token';
-    response = await dio.get(baseUrl+'commande/');
-   // print(response);
+    response = await dio.get(baseUrl + 'commande/');
+    // print(response);
     if (response.statusCode == 200) {
       log(response.toString());
       //print(response);
-      var data = jsonDecode(response.toString()) ;
+      var data = jsonDecode(response.toString());
       //print(data);//  print(data);
       for (var item in data['orders']) {
         commandes.add(Commande.fromJson(item));
@@ -33,17 +33,18 @@ class CommandeServices {
     return commandes.toList();
   }
 
-
   static Future<int> addCommande(Commande commande) async {
     var url;
     var response;
-    var dio =  DioUtil.getInstance();
+    var dio = DioUtil.getInstance();
     var token = await getUserInfoSharedPref("token");
     dio.options.headers["Authorization"] = "Bearer " + token;
 
-    await dio.post(baseUrl+'commande/add',data:commande.toJson()).then((value){
+    await dio
+        .post(baseUrl + 'commande/add', data: commande.toJson())
+        .then((value) {
       print(value.data);
-      response= value.statusCode;
+      response = value.statusCode;
     });
     return response;
   }

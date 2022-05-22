@@ -27,9 +27,9 @@ class ProfilPageF extends StatefulWidget {
 }
 
 class _ProfilPageFState extends State<ProfilPageF> {
-  bool isInCall=false;
+  bool isInCall = false;
   var client;
-  getClientProfile()async{
+  getClientProfile() async {
     setState(() {
       isInCall = true;
     });
@@ -50,6 +50,7 @@ class _ProfilPageFState extends State<ProfilPageF> {
     getClientProfile();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -73,7 +74,7 @@ class _ProfilPageFState extends State<ProfilPageF> {
                 Icons.edit,
                 color: myGrey,
               ),
-               onPressed: () {
+              onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -232,9 +233,12 @@ class _ProfilPageFState extends State<ProfilPageF> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               deleteToken();
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomeScreen()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WelcomeScreen()));
                             },
                             child: InfoCard(
                               text: autre_info,

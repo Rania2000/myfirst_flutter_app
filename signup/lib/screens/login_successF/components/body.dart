@@ -72,7 +72,9 @@ class Body extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return MainScreenF(isClient: isClient,);
+                      return MainScreenF(
+                        isClient: isClient,
+                      );
                     },
                   ),
                 );

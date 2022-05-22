@@ -64,7 +64,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                   commadeCalls();
                 },
                 child: Text(
-                  "Mes Livraison",
+                  "Mes Livraisons",
                   style: TextStyle(
                     //height: 1.171875,
                     fontSize: 34.0,

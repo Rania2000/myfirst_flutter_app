@@ -35,7 +35,7 @@ class ClientServices {
     var response;
     Dio dio = new Dio();
     var livreur;
-    var userId=await getUserInfoSharedPref('id');
+    var userId = await getUserInfoSharedPref('id');
     var token = await getUserInfoSharedPref("token");
     dio.options.headers['Authorization'] = 'Bearer $token';
     response = await dio.get(baseUrl + 'clients/$userId');
@@ -44,7 +44,7 @@ class ClientServices {
       print(response);
       final data = jsonDecode(response.body);
       //print(data);
-      livreur= Client.fromJson(data);
+      livreur = Client.fromJson(data);
     }
     return livreur;
   }

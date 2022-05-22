@@ -2,7 +2,7 @@ import 'package:signup/models/commande.dart';
 
 class Client {
   final id;
-  final String firstname;
+  late final String firstname;
   final String lastname;
   final String adress;
   final String email;

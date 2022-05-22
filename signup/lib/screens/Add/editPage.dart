@@ -48,7 +48,7 @@ class _EditScreenState extends State<EditScreen> {
                     topRight: Radius.circular(40),
                   )),
               child: InputWrapper(
-                  isEditing: widget.isEditing,
+                isEditing: widget.isEditing,
                 commande: widget.commande,
               ),
             )),

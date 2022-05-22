@@ -13,10 +13,9 @@ import 'package:signup/services/commande_service.dart';
 import 'InputField.dart';
 
 class InputWrapper extends StatefulWidget {
-
   final commande;
   final bool isEditing;
-  InputWrapper({required this.isEditing,this.commande});
+  InputWrapper({required this.isEditing, this.commande});
   @override
   State<InputWrapper> createState() => _InputWrapperState();
 }
@@ -49,14 +48,19 @@ class _InputWrapperState extends State<InputWrapper> {
   TextEditingController commentController = TextEditingController();
 
   DateTime _dateTime = DateTime.now();
-  
+
   @override
   void initState() {
     // TODO: implement initState
-    widget.isEditing?commandeController.text=widget.commande.titre:commentController.text='';
-     widget.isEditing?departController.text=widget.commande.AdrDepart:departController.text='';
+    widget.isEditing
+        ? commandeController.text = widget.commande.titre
+        : commentController.text = '';
+    widget.isEditing
+        ? departController.text = widget.commande.adrDepart
+        : departController.text = '';
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -82,7 +86,9 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: widget.isEditing ? widget.commande.titre :commandeController,
+                      controller: widget.isEditing
+                          ? widget.commande.titre
+                          : commandeController,
                       decoration: InputDecoration(
                           hintText: "Titre commande",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -96,7 +102,9 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: widget.isEditing ? widget.commande.AdrDepart : departController,
+                      controller: widget.isEditing
+                          ? widget.commande.adrDepart
+                          : departController,
                       decoration: InputDecoration(
                           hintText: "point de départ",
                           hintStyle: TextStyle(color: Colors.grey),
@@ -110,7 +118,9 @@ class _InputWrapperState extends State<InputWrapper> {
                         border: const Border(
                             bottom: const BorderSide(color: Colors.grey))),
                     child: TextField(
-                      controller: widget.isEditing ? widget.commande.AdrArrive :arriveController,
+                      controller: widget.isEditing
+                          ? widget.commande.adrArrive
+                          : arriveController,
                       decoration: InputDecoration(
                           hintText: "point d'arrivé",
                           hintStyle: TextStyle(color: Colors.grey),

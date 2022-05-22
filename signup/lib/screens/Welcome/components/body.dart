@@ -17,6 +17,8 @@ import 'package:signup/shared/sharedPrefValues.dart';
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
+  get client => null;
+
   @override
   State<Body> createState() => _BodyState();
 }
@@ -28,7 +30,7 @@ class _BodyState extends State<Body> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => MainScreenF(isClient: true,),
+            builder: (context) => MainScreenF(isClient: true),
             settings: const RouteSettings(name: "/mainPage"),
           ),
         );

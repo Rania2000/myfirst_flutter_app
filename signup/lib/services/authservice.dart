@@ -17,8 +17,9 @@ class AuthService {
       print(response.headers['Authorization'].toString());
       var token = response.data['token'];
       var refreshToken = response.headers['Authorization'];
-      var userId=response.data['id'];
-      saveAccessTokenSharedPref(token, refreshToken.toString(),userId);
+      var userId = response.data['id'];
+      var role = response.data['role'];
+      saveAccessTokenSharedPref(token, refreshToken.toString(), userId, role);
       return response;
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -40,8 +41,9 @@ class AuthService {
       print(response.headers['Authorization'].toString());
       var token = response.data['token'];
       var refreshToken = response.headers['Authorization'];
-      var userId=response.data['id'];
-      saveAccessTokenSharedPref(token, refreshToken.toString(),userId);
+      var userId = response.data['id'];
+      var role = response.data['role'];
+      saveAccessTokenSharedPref(token, refreshToken.toString(), userId, role);
       return response;
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -141,7 +143,6 @@ Future<Livreur> getliv() async {
       return null;
     }
   }
-
   Future<bool> logout() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     return true;

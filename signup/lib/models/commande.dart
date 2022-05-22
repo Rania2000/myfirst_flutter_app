@@ -52,7 +52,6 @@ class Commande {
   }
 
   factory Commande.fromJson(Map<String, dynamic> json) {
-
     return Commande(
       json['_id'].toString(),
       json['numCommande'].toString(),
@@ -65,7 +64,9 @@ class Commande {
       json['customer_id'].toString(),
       json['livreur_id'].toString(),
       //livreur,
-      json['date'].toString()==null?'2022-05-15T21:19:44.580Z':json['date'].toString(),
+      json['date'].toString() == null
+          ? '2022-05-15T21:19:44.580Z'
+          : json['date'].toString(),
       json['status'].toString(),
       json['prix'].toString(),
       json['typevehicule'].toString(),

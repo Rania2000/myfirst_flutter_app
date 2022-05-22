@@ -17,7 +17,7 @@ import 'screens/Profil_fournisseur/ProfilScreen.dart';
 
 class MainScreenF extends StatefulWidget {
   final bool isClient;
-  MainScreenF({Key? key,required this.isClient}) : super(key: key);
+  MainScreenF({Key? key, required this.isClient}) : super(key: key);
 
   @override
   _MainScreenFState createState() => _MainScreenFState();
@@ -25,20 +25,25 @@ class MainScreenF extends StatefulWidget {
 
 class _MainScreenFState extends State<MainScreenF> {
   int _page = 0;
-  bool client=false;
+  bool client = false;
   // GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   // ignore: non_constant_identifier_names
   @override
   void initState() {
-    client=widget.isClient;
+    client = widget.isClient;
     // TODO: implement initState
 
     super.initState();
   }
+
   final Screen = [
-    HomeScreenF(isClient:false,),
+    HomeScreenF(
+      isClient: false,
+    ),
     WalletScreen(),
-    EditScreen(isEditing: false,),
+    EditScreen(
+      isEditing: false,
+    ),
     NotifScreen(),
     ProfilPageF()
   ];
