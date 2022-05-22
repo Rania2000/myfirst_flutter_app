@@ -42,7 +42,7 @@ class ClientServices {
 
     if (response.statusCode == 200) {
       print(response);
-      final data = jsonDecode(response.body);
+      final data = jsonDecode(response.toString());
       //print(data);
       livreur = Client.fromJson(data);
     }

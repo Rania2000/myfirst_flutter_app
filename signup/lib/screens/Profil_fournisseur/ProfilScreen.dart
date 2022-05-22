@@ -104,7 +104,7 @@ class _ProfilPageFState extends State<ProfilPageF> {
 
                 Container(
                   child: Text(
-                    "Foulen le Fleuriste",
+                    client.firstname,
                     style: TextStyle(
                       height: 1.411764705882353,
                       fontSize: 34.0,
@@ -120,7 +120,7 @@ class _ProfilPageFState extends State<ProfilPageF> {
                   height: 5,
                 ),
                 Text(
-                  "fleuriste",
+                  client.lastname,
                   style: TextStyle(
                       fontSize: 15,
                       color: myGrey,
@@ -166,7 +166,7 @@ class _ProfilPageFState extends State<ProfilPageF> {
                           ),
                           Container(
                             child: InfoCard(
-                              text: phone,
+                              text: client.phone,
                               icon: Icons.phone, /*    onPressed: () async {}*/
                             ),
                           ),
@@ -178,7 +178,7 @@ class _ProfilPageFState extends State<ProfilPageF> {
                             ),
                           ),
                           InfoCard(
-                            text: location,
+                            text: client.adress,
                             icon: Icons.location_city,
                           ),
                           SizedBox(
@@ -189,7 +189,7 @@ class _ProfilPageFState extends State<ProfilPageF> {
                             ),
                           ),
                           InfoCard(
-                            text: email,
+                            text: client.status,
                             icon: Icons.email,
                           ),
                           SizedBox(
@@ -222,8 +222,8 @@ class _ProfilPageFState extends State<ProfilPageF> {
                             ),
                           ),*/
                           InfoCard(
-                            text: Compte_bancaire,
-                            icon: Icons.money,
+                            text: client.password,
+                            icon: Icons.person,
                           ),
                           SizedBox(
                             height: 20,
@@ -241,8 +241,8 @@ class _ProfilPageFState extends State<ProfilPageF> {
                                       builder: (context) => WelcomeScreen()));
                             },
                             child: InfoCard(
-                              text: autre_info,
-                              icon: Icons.more,
+                              text: 'Déconnexion',
+                              icon: Icons.logout,
                             ),
                           ),
                         ],

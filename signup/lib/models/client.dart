@@ -10,10 +10,12 @@ class Client {
   final String status;
   final String phone;
   final String cin;
-  final order_list; // to ask about the type if i add commande as a type
+ // final order_list; // to ask about the type if i add commande as a type
 
   Client(this.id, this.firstname, this.lastname, this.adress, this.status,
-      this.email, this.password, this.phone, this.cin, this.order_list);
+      this.email, this.password, this.phone, this.cin,
+     // this.order_list,
+      );
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -26,7 +28,7 @@ class Client {
       'phone': phone,
       'status': status,
       'cin': cin,
-      'order_list': {},
+     // 'order_list': {},
     };
   }
 
@@ -41,7 +43,7 @@ class Client {
       json['status'].toString(),
       json['phone'].toString(),
       json['cin'].toString(),
-      json['order_list']['_id'].toString(),
+      //json['order_list']['_id'].toString(),
     );
   }
 }
