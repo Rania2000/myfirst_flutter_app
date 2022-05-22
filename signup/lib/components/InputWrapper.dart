@@ -12,7 +12,6 @@ import 'package:signup/models/commande.dart';
 import 'package:signup/services/commande_service.dart';
 import 'package:signup/shared/sharedPrefValues.dart';
 
-import 'InputField.dart';
 
 class InputWrapper extends StatefulWidget {
 
@@ -62,6 +61,7 @@ class _InputWrapperState extends State<InputWrapper> {
     widget.isEditing?commentController.text=widget.commande.code:commentController.text='';
     dropdownValue=widget.commande.typeCommande??'Alimentaire';
     dropdownValue2=widget.commande.typeVehicule??'voiture';
+
     super.initState();
   }
   @override
